@@ -24,8 +24,8 @@ public class StudentUI {
 	 * @param database
 	 *            the database
 	 */
-	public StudentUI(User user, DataBaseHome database) {
-		student = new StudentHome(user, database);
+	public StudentUI(User user) {
+		student = new StudentHome(user);
 	}
 
 	/**

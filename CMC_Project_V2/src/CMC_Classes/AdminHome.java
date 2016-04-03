@@ -20,9 +20,9 @@ public class AdminHome {
 	 * @param user,
 	 *            database
 	 */
-	public AdminHome(User user, DataBaseHome database) {
+	public AdminHome(User user) {
 		super();
-		this.database = database;
+		this.database = new DataBaseHome();
 	//	this.thisUser = user;
 
 		this.users = database.getUsers();

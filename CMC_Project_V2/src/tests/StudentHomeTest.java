@@ -8,14 +8,15 @@ import org.junit.Test;
 
 public class StudentHomeTest {
 	
-	School sju = new School("SJU");
+	School sju;
 	User u;
-	DataBaseHome database;
-
+	StudentHome sh;
+	
 	@Before
 	public void setUp() throws Exception {
 		u = new User("Conor", "Lorsung", "clorsung", "password", 'A', 'y');
-		StudentHome sh = new StudentHome(u, database);
+		sh = new StudentHome(u);
+		sju = new School("SJU","Minnesota", "Collegeville","Private", 5000, 20.0, 50.0, 50, 5000 , 20.0, 200, .45, .30, 2, 3, 4);
 	}
 
 	@Test
@@ -34,37 +35,46 @@ public class StudentHomeTest {
 	@Test
 	public void testGetSavedSchools() {
 		sh.addSchool(sju);
-		Assert.assertTrue("u saved schools is SJU", sh.getSavedSchools().equals(sju));
+		assertTrue("u saved schools is SJU", sh.getSavedSchools().equals(sju));
 	}
 
 	@Test
 	public void testRemoveSchool() {
-		Assert.assertTrue("sh removes school sju", sh.removeSchool(sju));
+		assertTrue("sh removes school sju", sh.removeSchool(sju).equals(sju));
 	}
 
 	@Test
 	public void testAddSchool() {
-		Assert.assertTrue("u add school is true", sh.addSchool(sju).equals(true));
+		assertTrue("u add school is true", sh.addSchool(sju).equals(true));
 	}
 
 	@Test
 	public void testSearch() {
-		Assert.assertTrue("Search yields Adelphi", sh.search("Adelphi").equals(ADELPHI));
+		assertTrue("Search yields Adelphi", sh.search("Adelphi",null,null,null,null,null,null,null,null,null
+				,null,null,null,null,null,null,null)[0].getName().equals("Adelphi"));
 	}
 
 	@Test
 	public void testGetRecommend() {
-		Assert.assertTrue("getRecommend gets the recommended schools", sh.getRecommend().equals(recommend));
+		assertTrue("getRecommend gets the recommended schools", sh.getRecommend()[0].equals("the first recommended search"));
+		assertTrue("getRecommend gets the recommended schools", sh.getRecommend()[1].equals("the second recommended search"));
+		assertTrue("getRecommend gets the recommended schools", sh.getRecommend()[2].equals("the third recommended search"));
+		assertTrue("getRecommend gets the recommended schools", sh.getRecommend()[3].equals("the fourth recommended search"));
+		assertTrue("getRecommend gets the recommended schools", sh.getRecommend()[4].equals("the fifth recommended search"));
 	}
 
 	@Test
 	public void testGetSearch() {
-		Assert.assertTrue("Get search returns top 5 results.", sh.getSearch().equals(top5));
+		assertTrue("Get search returns top 5 results.", sh.getSearch()[0].equals("First school in the search, idk what that is"));
+		assertTrue("Get search returns top 5 results.", sh.getSearch()[1].equals("Second school in the search, idk what that is"));
+		assertTrue("Get search returns top 5 results.", sh.getSearch()[2].equals("Third school in the search, idk what that is"));
+		assertTrue("Get search returns top 5 results.", sh.getSearch()[3].equals("Fourth school in the search, idk what that is"));
+		assertTrue("Get search returns top 5 results.", sh.getSearch()[4].equals("Fifth school in the search, idk what that is"));
 	}
 
 	@Test
 	public void testGetSearchID() {
-		Assert.assertTrue("Get search ID is -1", sh.getSearchID(5).equals(4));
+		assertTrue("Get search ID is -1", sh.getSearchID(1) == 0);
 	}
 
 }

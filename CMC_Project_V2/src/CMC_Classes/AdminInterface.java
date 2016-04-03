@@ -11,8 +11,8 @@ import java.util.*;
 public class AdminInterface {
 	AdminHome admin;
 
-	public AdminInterface(DataBaseHome data, User user) {
-		admin = new AdminHome(user, data);
+	public AdminInterface(User user) {
+		admin = new AdminHome(user);
 	}
 
 	/**

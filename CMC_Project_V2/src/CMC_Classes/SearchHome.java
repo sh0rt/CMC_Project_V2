@@ -25,6 +25,7 @@ public class SearchHome {
 		recommend = new School[5];
 		this.database = database;
 	}
+	
 	public SearchHome() {
 		super();
 		top10 = new int[10];

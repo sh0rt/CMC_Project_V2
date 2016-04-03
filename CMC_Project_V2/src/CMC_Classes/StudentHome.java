@@ -20,11 +20,11 @@ public class StudentHome {
 	 * @param user,
 	 *            database
 	 */
-	public StudentHome(User user, DataBaseHome database) {
+	public StudentHome(User user) {
 		super();
 		this.user = user;
 //		this.database = database;
-		search = new SearchHome(database);
+		search = new SearchHome();
 	}
 
 	/**

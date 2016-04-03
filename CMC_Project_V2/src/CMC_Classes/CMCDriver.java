@@ -31,7 +31,7 @@ public class CMCDriver{
  public void demoStudentFunctionalities(){
    p("Lets login as a student");
    user = userInterface.login("C","L");
-   studentInterface = new StudentUI(user,dbhome);
+   studentInterface = new StudentUI(user);
    p("Alright, now lets take a look at our profile");
    p("Profile: \n"+studentInterface.viewProfile());
    try{Thread.sleep(FUNCTION_SLEEP);}catch(InterruptedException ex){}
@@ -71,7 +71,7 @@ public class CMCDriver{
   * demonstrates admin functionalities
   */
  public void demoAdminFunctionalities(){
-   adminInterface = new AdminInterface(dbhome, user);
+   adminInterface = new AdminInterface(user);
    p("Admin Functionality Demo");
    p("Admin has the ability to: view schools, edit school, add school, \n \t view school, add user, edit user, deactivate user");
    p("First we explore the view schools feature");
