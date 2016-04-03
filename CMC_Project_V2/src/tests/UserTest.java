@@ -9,7 +9,7 @@ public class UserTest {
 
 	User user1, user2, user3;
 	School sju;
-	ArrayList<School> schools = new ArrayList<School>(null);
+	ArrayList<School> schools = new ArrayList<School>();
 
 	@Before
 	public void setUp() throws Exception {
@@ -90,7 +90,7 @@ public class UserTest {
 	@Test
 	public void testSetStatus() {
 		Assert.assertTrue("Type of user2 is n", user2.getStatus() == 'n');
-		user2.setType('y');
+		user2.setStatus('y');
 		Assert.assertTrue("Type of user2 is y", user2.getStatus() == 'y');
 	}
 
@@ -114,13 +114,13 @@ public class UserTest {
 	
 	@Test
 	public void testGetSchools() {
-		Assert.assertTrue("Get School returns sju.", user1.getSchools(0).equals(sju));
+		Assert.assertTrue("Get School returns sju.", user1.getSchools().equals(null));
 	}
 
 	@Test
 	public void testGetID() {
-		Assert.assertTrue("user1 ID is 1", user1.getID() == 1);
-		Assert.assertTrue("user2 ID is 2", user2.getID() == 2);
-		Assert.assertTrue("user3 ID is 3", user3.getID() == 3);
+		Assert.assertTrue("user1 ID is 1", user1.getID() == 12);
+		Assert.assertTrue("user2 ID is 2", user2.getID() == 13);
+		Assert.assertTrue("user3 ID is 3", user3.getID() == 14);
 	}
 }

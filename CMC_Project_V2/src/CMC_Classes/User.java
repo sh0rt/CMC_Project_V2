@@ -45,13 +45,12 @@ public class User {
 	 */
 	public User(String firstName, String lastName, String username, String password, char type, char status) {
 		id = idCount++;
-		idCount++;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
 		this.password = password;
 		this.type = type;
-		this.status = 'a';
+		this.status = status;
 		schools = new ArrayList<School>();
 	}
 
