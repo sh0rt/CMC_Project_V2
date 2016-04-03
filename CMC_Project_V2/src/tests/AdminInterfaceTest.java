@@ -71,23 +71,80 @@ public class AdminInterfaceTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testViewSchoolWithInvalidID() {
+	public void testViewSchoolInvalidIDNegative() {
 		admin.viewSchool(-3);
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testViewSchoolInvalidIDZero() {
+		admin.viewSchool(0);
 	}
 
 	@Test
 	public void testAddUser() {
 		fail("Not yet implemented");
 	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddUserInvalidFirstName() {
+		user.addUser("", "Rahal", "ImadUser", "Edited", 'u');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddUserInvalidLastName() {
+		user.addUser("Imad", "", "ImadUser", "Edited", 'u');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddUserInvalidUsername() {
+		user.addUser("Imad", "Rahal", "", "Edited", 'u');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddUserInvalidPassword() {
+		user.addUser("Imad", "Rahal", "ImadUser", "", 'u');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddUserInvalidType() {
+		user.addUser("Imad", "Rahal", "ImadUser", "Edited", "");
+	}
 
 	@Test
 	public void testEditUser() {
 		fail("Not yet implemented");
 	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUserInvalidFirstName() {
+		user.editUser("", "Rahal", "ImadUser", "Edited", 'u', 'Y');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUserInvalidLastName() {
+		user.editUser("Imad", "", "ImadUser", "Edited", 'u', 'Y');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUserInvalidUsername() {
+		user.editUser("Imad", "Rahal", "", "Edited", 'u', 'Y');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUserInvalidPassword() {
+		user.editUser("Imad", "Rahal", "ImadUser", "", 'u', 'Y');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUserInvalidType() {
+		user.editUser("Imad", "Rahal", "ImadUser", "Edited", "", 'Y');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUserInvalidStatus() {
+		user.editUser("Imad", "Rahal", "ImadUser", "Edited", 'u', "");
+	}
+
 
 	@Test
 	public void testDeactivateUser() {
 		fail("Not yet implemented");
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testDeactivateUserInvalidIDNegative() {
+		admin.deactivateUser(-3);
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testDeactivateUserInvalidIDZero() {
+		admin.deactivateUser(0);
 	}
 
 	@Test
@@ -98,6 +155,14 @@ public class AdminInterfaceTest {
 	@Test
 	public void testViewUser() {
 		fail("Not yet implemented");
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testViewUserInvalidIDNegative() {
+		admin.viewUser(-3);
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testViewUserInvalidIDZero() {
+		admin.viewUser(0);
 	}
 
 }
