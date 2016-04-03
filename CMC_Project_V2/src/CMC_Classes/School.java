@@ -522,4 +522,8 @@ public class School {
 	public String getSchool() {
 		return this.name;
 	}
+	
+	public void addEmphasis(String emphasis){
+		this.emphasis[emphasis.length()] = emphasis;
+	}
 }
