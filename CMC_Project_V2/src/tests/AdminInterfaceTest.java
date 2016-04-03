@@ -18,6 +18,7 @@ public class AdminInterfaceTest {
 
 	@Before
 	public void setUp() throws Exception {
+		User =  Userhome.Login("ImadUser", "Edited");
 		admin = new AdminInterface();
 		data1 = new DataBaseHome();
 		
