@@ -130,7 +130,7 @@ public class AdminInterfaceTest {
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUserInvalidStatus() {
-		user.editUser("Imad", "Rahal", "ImadUser", "Edited", 'u', "");
+		user.editUser("Imad", "Rahal", "ImadUser", "Edited", 'u', ' ');
 	}
 
 
