@@ -1,19 +1,24 @@
+package tests;
+
 import static org.junit.Assert.*;
 import java.util.*;
+import org.junit.*;
 import org.junit.Before;
 import org.junit.Test;
-import de
+import CMC_Classes.*;
+
 public class DatabaseHomeTest {
 	DataBaseHome database;
 	User user1, user2, user3;
 	School school1, school2, school3;
-
+	String[] emphasis;
 	@Before
 	public void setUp() throws Exception {
 		database = new DataBaseHome();
-		user1 = new User("Tyler", "Weiss", "tnweiss", "weiss", 'a');
-		user2 = new User("T-$", "Weiss", "ball", "isLife", 'a');
-		user3 = new User("T-Buckets", "Weiss", "get", "money", 'a');
+		emphasis = new String[2];
+		user1 = new User("Tyler", "Weiss", "tnweiss", "weiss", 'a','a');
+		user2 = new User("T-$", "Weiss", "ball", "isLife", 'a','a');
+		user3 = new User("T-Buckets", "Weiss", "get", "money", 'a','a');
 		/*
 		database.addUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(), 
 				user1.getPassword(), user1.getType());
@@ -24,21 +29,24 @@ public class DatabaseHomeTest {
 				*/
 		school1 = new School("Saint Johns University","Minnesota", "SMALL-CITY", "PRIVATE", 5000, .5, 20,30,5000.0,.3,1000,.5,.3,4,3,5);
 		school2 = new School("University of Minnesota Duluth","Minnesota", "UNKNOWN", "STATE", 50000, .7, 20,30,5000.0,.3,1000,.5,.3,4,3,5);
-		school3 = new School(("University of Minnesota","Minnesota", "URBAN", "UNKNOWN", 500000, .45, 20,30,5000.0,.3,1000,.5,.3,4,3,5));
-		String[] emphasis = new String[3];
+		school3 = new School("University of Minnesota","Minnesota", "URBAN", "UNKNOWN", 500000, .45, 20,30,5000.0,.3,1000,.5,.3,4,3,5);
+		//String[] emphasis = new String[3];
 		database.addSchool(school2.getSchool(),school2.getState(),school2.getLocation(),
 				school2.getControl(),school2.getNumStudents(),school2.getPercentFemale(),
 			    school2.getSatVerbal(),school2.getSatMath(),school2.getExpenses(),
 				school2.getPercentFinAid(),school2.getNumApplicants(),school2.getPercentAdmitted(),
 				school2.getPercentEnrolled(),school2.getAcademicScale(),school2.getSocialscale(),
-				school2.getQualOfLife())
+				school2.getQualOfLife());
 		database.addSchool(school3.getSchool(),school3.getState(),school3.getLocation(),
 				school3.getControl(),school3.getNumStudents(),school3.getPercentFemale(),
 			    school3.getSatVerbal(),school3.getSatMath(),school3.getExpenses(),
 				school3.getPercentFinAid(),school3.getNumApplicants(),school3.getPercentAdmitted(),
 				school3.getPercentEnrolled(),school3.getAcademicScale(),school3.getSocialscale(),
-				school3.getQualOfLife())
+				school3.getQualOfLife());
 	}
+	//String school, String state, String location, String control, int numStudents,
+	//double percentFemale, int satVerbal, int satMath, double expenses, double percentFinAid, int numApplicants,
+	//double percentAdmitted, double percentEnrolled, int academicScale, int socialScale, int qualOflife
 	//----------------------------------------------------Login----------------------------------------------------------
 	@Test
 	public void testLoginSuccess() {
@@ -90,7 +98,7 @@ public class DatabaseHomeTest {
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddUserWithEmptyType() {
-		database.addUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(),user1.getPassword(), '');
+		database.addUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(),user1.getPassword(), ' ');
 	}
 	//-----------------------------------------------getUsers--------------------------------------------------------
 	@Test
@@ -104,48 +112,47 @@ public class DatabaseHomeTest {
 	public void testEditUser() {
 		user1.setFirstName("t");
 		assertTrue("DatabaseHome encountered an error editing user firstname",database.editUser("t", user1.getLastName(), user1.getUsername(), 
-				user1.getPassword(), user1.getType()).equals(user1));
+				user1.getPassword(), user1.getType() , 'a').equals(user1));
 		user1.setLastName("t");
 		assertTrue("DatabaseHome encountered an error editing user lastname.",database.editUser(user1.getFirstName(), "t", user1.getUsername(), 
-				user1.getPassword(), user1.getType()).equals(user1));
+				user1.getPassword(), user1.getType(), 'a').equals(user1));
 		user1.setUsername("t");
 		assertTrue("DatabaseHome encountered an error editing user username.",database.editUser(user1.getFirstName(), user1.getLastName(), " ", 
-				user1.getPassword(), user1.getType()).equals(user1));
+				user1.getPassword(), user1.getType(),'a').equals(user1));
 		user1.setPassword("t");
 		assertTrue("DatabaseHome encountered an error editing user password.",database.editUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(), 
-				"t", user1.getType()).equals(user1));
+				"t", user1.getType(),'a').equals(user1));
 		user1.setType('s');
 		assertTrue("DatabaseHome encountered an error editing user type.",database.editUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(), 
-				user1.getPassword(), 's').equals(user1));
+				user1.getPassword(), 's','a').equals(user1));
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUserWithTypeNotAorS() {
 		database.editUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(), 
-				user1.getPassword(), 'f');
+				user1.getPassword(), 'f', 'a');
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUserWithEmptyFirstname() {
-		database.editUser("", user1.getLastName(), user1.getUsername(),user1.getPassword(), 'f');
+		database.editUser("", user1.getLastName(), user1.getUsername(),user1.getPassword(), 'f','a');
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUserWithEmptyLastname() {
-		database.editUser(user1.getFirstName(), "", user1.getUsername(),user1.getPassword(), 'f');
+		database.editUser(user1.getFirstName(), "", user1.getUsername(),user1.getPassword(), 'f','a');
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUserWithEmptyUsername() {
-		database.editUser(user1.getFirstName(), user1.getLastName(), "",user1.getPassword(), 'f');
+		database.editUser(user1.getFirstName(), user1.getLastName(), "",user1.getPassword(), 'f','a');
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUserWithEmptyPassword() {
-		database.editUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(),"", 'f');
+		database.editUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(),"", 'f','a');
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUserWithEmptyType() {
 
-		database.editUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(),user1.getPassword(), '');
+		database.editUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(),user1.getPassword(), ' ', 'a');
 	}
 	//----------------------------------------------deactivate user---------------------------------------------------
-<<<<<<< HEAD
 	@Test
 	public void testDeactivateUser() {
 		user2.setStatus('d');
@@ -160,8 +167,11 @@ public class DatabaseHomeTest {
 		database.deactivateUser(7);
 	}
     //----------------------------------------------addSchool--------------------------------------------------------
+	//String school, String state, String location, String control, int numStudents,
+	//double percentFemale, int satVerbal, int satMath, double expenses, double percentFinAid, int numApplicants,
+	//double percentAdmitted, double percentEnrolled, int academicScale, int socialScale, int qualOflife
 	@Test
-	public void testAddSchool{
+	public void testAddSchool(){
 		assertTrue("add school method fault",database.addSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
@@ -170,7 +180,7 @@ public class DatabaseHomeTest {
 				school1.getQualOfLife()).equals(school1));
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptyName{
+	public void testAddSchoolWithEmptyName(){
 		database.addSchool("",school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
@@ -179,7 +189,7 @@ public class DatabaseHomeTest {
 				school1.getQualOfLife());
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptyState{
+	public void testAddSchoolWithEmptyState(){
 		database.addSchool(school1.getSchool(),"",school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
@@ -188,7 +198,7 @@ public class DatabaseHomeTest {
 				school1.getQualOfLife());
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptyLocation{
+	public void testAddSchoolWithEmptyLocation(){
 		database.addSchool(school1.getSchool(),school1.getState(),"",
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
@@ -197,7 +207,7 @@ public class DatabaseHomeTest {
 				school1.getQualOfLife());
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptyControl{
+	public void testAddSchoolWithEmptyControl(){
 		database.addSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				"",school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
@@ -206,112 +216,112 @@ public class DatabaseHomeTest {
 				school1.getQualOfLife());
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptyNumStudents{
+	public void testAddSchoolWithEmptyNumStudents(){
 		database.addSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
-				school1.getControl(),"",school1.getPercentFemale(),
+				school1.getControl(),0,school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
 				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
 				school1.getQualOfLife());
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptyPercentFemale{
+	public void testAddSchoolWithEmptyPercentFemale(){
 		database.addSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
-				school1.getControl(),school1.getNumStudents(),"",
+				school1.getControl(),school1.getNumStudents(),0,
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
 				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
 				school1.getQualOfLife());
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptySatVerbal{
+	public void testAddSchoolWithEmptySatVerbal(){
 		database.addSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
-			    "",school1.getSatMath(),school1.getExpenses(),
+			    0,school1.getSatMath(),school1.getExpenses(),
 				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
 				school1.getQualOfLife());
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptySatMath{
+	public void testAddSchoolWithEmptySatMath(){
 		database.addSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
-			    school1.getSatVerbal(),"",school1.getExpenses(),
+			    school1.getSatVerbal(),0,school1.getExpenses(),
 				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
 				school1.getQualOfLife());
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptyExpenses{
+	public void testAddSchoolWithEmptyExpenses(){
 		database.addSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
-			    school1.getSatVerbal(),school1.getSatMath(),"",
+			    school1.getSatVerbal(),school1.getSatMath(),0,
 				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
 				school1.getQualOfLife());
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptyPercentFinAid{
+	public void testAddSchoolWithEmptyPercentFinAid(){
 		database.addSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
-				"",school1.getNumApplicants(),school1.getPercentAdmitted(),
+				0,school1.getNumApplicants(),school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
 				school1.getQualOfLife());
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptyNumApplicants{
+	public void testAddSchoolWithEmptyNumApplicants(){
 		database.addSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
-				school1.getPercentFinAid(),"",school1.getPercentAdmitted(),
+				school1.getPercentFinAid(),0,school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
 				school1.getQualOfLife());
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptyPercentAdmitted{
+	public void testAddSchoolWithEmptyPercentAdmitted(){
 		database.addSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
-				school1.getPercentFinAid(),school1.getNumApplicants(),"",
+				school1.getPercentFinAid(),school1.getNumApplicants(),0,
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
 				school1.getQualOfLife());
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptyPercentEnrolled{
+	public void testAddSchoolWithEmptyPercentEnrolled(){
 		database.addSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
 				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
-				"",school1.getAcademicScale(),school1.getSocialscale(),
+				0,school1.getAcademicScale(),school1.getSocialscale(),
 				school1.getQualOfLife());
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptyAcademicScale{
+	public void testAddSchoolWithEmptyAcademicScale(){
 		database.addSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
 				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
-				school1.getPercentEnrolled(),"",school1.getSocialscale(),
+				school1.getPercentEnrolled(),0,school1.getSocialscale(),
 				school1.getQualOfLife());
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptySocialScale{
+	public void testAddSchoolWithEmptySocialScale(){
 		database.addSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
 				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
-				school1.getPercentEnrolled(),school1.getAcademicScale(),"",
+				school1.getPercentEnrolled(),school1.getAcademicScale(),0,
 				school1.getQualOfLife());
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptyQualOfLife{
+	public void testAddSchoolWithEmptyQualOfLife(){
 		database.addSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
 				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
-				"");
+				0);
 	}
 	//-------------------------------------------------------edit school----------------------------------------------------------
 	/*
@@ -320,7 +330,8 @@ public class DatabaseHomeTest {
                            int socialScale, int qualOflife, String[] emphasis, int id
 	 */
 	@Test
-	public void testEditSchool{
+	public void testEditSchool(){
+		String[] emphasis = new String[2];
 		school1.setState("test");
 		school1.setLocation("test");
 		school1.setControl("test");
@@ -333,8 +344,8 @@ public class DatabaseHomeTest {
 		school1.setNumApplicants(1);
 		school1.setPercentAdmitted(0.1);
 		school1.setPercentEnrolled(0.1);
-		school1.setacademicScale(1);
-		school1.setSocialScale(1);
+		school1.setAcademicScale(1);
+		school1.setSocialscale(1);
 		school1.setQualOfLife(1);
 		school1.setEmphasis(emphasis);
 		assertTrue("edit school method fault",database.editSchool("test","test","test",
@@ -342,7 +353,7 @@ public class DatabaseHomeTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithZeroNumStudents{
+	public void testEditSchoolFailsWithZeroNumStudents(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),0,school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
@@ -351,7 +362,7 @@ public class DatabaseHomeTest {
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithNegativePercentFemale{
+	public void testEditSchoolFailsWithNegativePercentFemale(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),-1.0,
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
@@ -360,7 +371,7 @@ public class DatabaseHomeTest {
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithOverPercentFemale{
+	public void testEditSchoolFailsWithOverPercentFemale(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),101.0,
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
@@ -369,7 +380,7 @@ public class DatabaseHomeTest {
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithNegativeSatVerbal{
+	public void testEditSchoolFailsWithNegativeSatVerbal(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    -1.0,school1.getSatMath(),school1.getExpenses(),
@@ -378,7 +389,7 @@ public class DatabaseHomeTest {
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithOverSatVerbal{
+	public void testEditSchoolFailsWithOverSatVerbal(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    801.0,school1.getSatMath(),school1.getExpenses(),
@@ -387,7 +398,7 @@ public class DatabaseHomeTest {
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithNegativeSatMath{
+	public void testEditSchoolFailsWithNegativeSatMath(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),-1.0,school1.getExpenses(),
@@ -396,7 +407,7 @@ public class DatabaseHomeTest {
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithOverSatMath{
+	public void testEditSchoolFailsWithOverSatMath(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),801.0,school1.getExpenses(),
@@ -405,7 +416,7 @@ public class DatabaseHomeTest {
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithNegativeExpenses{
+	public void testEditSchoolFailsWithNegativeExpenses(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),-100.0,
@@ -414,7 +425,7 @@ public class DatabaseHomeTest {
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithNegativePercentFinAid{
+	public void testEditSchoolFailsWithNegativePercentFinAid(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
@@ -423,7 +434,7 @@ public class DatabaseHomeTest {
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithOverPercentFinAid{
+	public void testEditSchoolFailsWithOverPercentFinAid(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
@@ -432,107 +443,107 @@ public class DatabaseHomeTest {
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithNegativeApplicants{
+	public void testEditSchoolFailsWithNegativeApplicants(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
-				school1.getPercentFinAid,-1,school1.getPercentAdmitted(),
+				school1.getPercentFinAid(),-1,school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithNegativePercentAdmitted{
+	public void testEditSchoolFailsWithNegativePercentAdmitted(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
-				school1.getPercentFinAid,school1.getNumApplicants(),-1.0,
+				school1.getPercentFinAid(),school1.getNumApplicants(),-1.0,
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithOverPercentAdmitted{
+	public void testEditSchoolFailsWithOverPercentAdmitted(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
-				school1.getPercentFinAid,school1.getNumApplicants(),101.0,
+				school1.getPercentFinAid(),school1.getNumApplicants(),101.0,
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithNegativePercentEnrolled{
+	public void testEditSchoolFailsWithNegativePercentEnrolled(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
-				school1.getPercentFinAid,school1.getNumApplicants(),school1.getPercentAdmitted(),
+				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				-1.0,school1.getAcademicScale(),school1.getSocialscale(),
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithOverPercentEnrolled{
+	public void testEditSchoolFailsWithOverPercentEnrolled(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
-				school1.getPercentFinAid,school1.getNumApplicants(),school1.getPercentAdmitted(),
+				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				101.0,school1.getAcademicScale(),school1.getSocialscale(),
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithUnderAcademicScale{
+	public void testEditSchoolFailsWithUnderAcademicScale(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
-				school1.getPercentFinAid,school1.getNumApplicants(),school1.getPercentAdmitted(),
+				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),0,school1.getSocialscale(),
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithOverAcademicScale{
+	public void testEditSchoolFailsWithOverAcademicScale(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
-				school1.getPercentFinAid,school1.getNumApplicants(),school1.getPercentAdmitted(),
+				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),6,school1.getSocialscale(),
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithUnderSocialScale{
+	public void testEditSchoolFailsWithUnderSocialScale(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
-				school1.getPercentFinAid,school1.getNumApplicants(),school1.getPercentAdmitted(),
+				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),school1.getAcademicScale(),0,
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithOverSocialScale{
+	public void testEditSchoolFailsWithOverSocialScale(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
-				school1.getPercentFinAid,school1.getNumApplicants(),school1.getPercentAdmitted(),
+				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),school1.getAcademicScale(),6,
 				school1.getQualOfLife(),emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithLowQualOfLife{
+	public void testEditSchoolFailsWithLowQualOfLife(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
-				school1.getPercentFinAid,school1.getNumApplicants(),school1.getPercentAdmitted(),
+				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
 				0,emphasis,0);		
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditSchoolFailsWithHighQualOfLife{
+	public void testEditSchoolFailsWithHighQualOfLife(){
 		database.editSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
-				school1.getPercentFinAid,school1.getNumApplicants(),school1.getPercentAdmitted(),
+				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
 				6,emphasis,0);		
 	}
 	//-------------------------------------------getSchools-----------------------------------------
 	@Test
-	public void testGetSchools{
+	public void testGetSchools(){
 		ArrayList<School> array = new ArrayList<School>();
 		assertTrue("School1 not found in getSchoo2",array.get(0).equals(school2));
 		assertTrue("School1 not found in getSchoo3",array.get(1).equals(school3));	
@@ -540,8 +551,8 @@ public class DatabaseHomeTest {
 	//-----------------------------------------tearDown------------------------------------------------
 	@After
 	public void tearDown(){
-		database.remove(school2.getSchool());
-		database.remove(school3.getSchool());
+		database.removeSchool(school2.getSchool());
+		database.removeSchool(school3.getSchool());
+		database.removeSchool(school1.getSchool());
 	}
->>>>>>> branch 'master' of https://github.com/sh0rt/CMCProject.git
 }

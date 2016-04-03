@@ -107,7 +107,7 @@ public class AdminHome {
 				percentFemale, expenses, percentFinAid, percentAdmitted, percentEnrolled, academicScale, socialScale,
 				qualOflife, emphasis);
 		database.addSchool(school, state, location, control,numStudents,percentFemale,satVerbal, satMath, expenses, percentFinAid,
-				numApplicants, percentAdmitted, percentEnrolled, academicScale, socialScale, qualOflife, emphasis);
+				numApplicants, percentAdmitted, percentEnrolled, academicScale, socialScale, qualOflife);
 		schools.add(temp);
 		return temp;
 	}
@@ -181,7 +181,7 @@ public class AdminHome {
 		}
 		for (int i = 0; i < users.size(); i++) {
 			User temp = users.get(i);
-			database.editUser(i, temp.getFirstName(), temp.getLastName(), temp.getUsername(), temp.getPassword(),
+			database.editUser(temp.getFirstName(), temp.getLastName(), temp.getUsername(), temp.getPassword(),
 					temp.getType(), temp.getStatus());
 
 		}

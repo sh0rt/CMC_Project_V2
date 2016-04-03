@@ -55,7 +55,7 @@ public User addUser(String firstname, String lastname, String username, String p
       return users;
     }
     
-    public User editUser(int id,String firstname, String lastname, String username, String password, char type,char status){
+    public User editUser(String firstname, String lastname, String username, String password, char type,char status){
     	if(type != 'a' || type != 's')
     		throw new IllegalArgumentException("type is not a or s");
     	else if(firstname.equals(""))
@@ -126,9 +126,9 @@ public User addUser(String firstname, String lastname, String username, String p
     }
     
   public School addSchool(String school, String state, String location, String control, int numStudents,
-			double percentFemale, int satVerbal, int satMath, double expenses, double percentFinAid, int numApplicants,
-			double percentAdmitted, double percentEnrolled, int academicScale, int socialScale, int qualOflife,
-			String[] emphasis){
+			double percentFemale, double satVerbal, double satMath, double expenses, double percentFinAid, int numApplicants,
+			double percentAdmitted, double percentEnrolled, int academicScale, int socialScale, int qualOflife
+			){
 	  
 	  dummydatabase.university_addUniversity(school, state, location, control, numStudents,percentFemale, satVerbal, satMath, expenses,
 			  percentFinAid, numApplicants, percentAdmitted, percentEnrolled, academicScale, socialScale,

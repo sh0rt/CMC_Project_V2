@@ -160,7 +160,7 @@ public class SchoolTest {
 	}
 	@Test
 	public void testSetEmphasis() {
-		school1.setEmphasis("code");
+		school1.addEmphasis("code");
 		assertTrue("setEmphasis working", school1.getEmphasisString().contains("code"));
 	}
 	@Test
@@ -271,7 +271,7 @@ public class SchoolTest {
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void setEmptyEmphasis() {
-		school1.setEmphasis("");
+		school1.setEmphasis(null);
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void setEmptySchoolName() {

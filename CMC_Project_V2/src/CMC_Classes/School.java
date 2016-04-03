@@ -437,17 +437,8 @@ public class School {
 	 * @param emphasis
 	 *            the emphasis to set
 	 */
-	public void setEmphasis(String emphasis) {
-		try {
-			int count = 0;
-			for (int i = 0; i < this.emphasis.length; i++) {
-				count++;
-				if (this.emphasis[i].equals(null))
-					break;
-			}
-			this.emphasis[count + 1] = emphasis;
-		} catch (NullPointerException ex) {
-		}
+	public void setEmphasis(String[] emphasis) {
+		this.emphasis = emphasis;
 	}
 
 	/**
