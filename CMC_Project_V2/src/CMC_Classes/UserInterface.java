@@ -12,8 +12,8 @@ public class UserInterface {
 	UserHome user;
 	public static final User INCORRECT = new User("x", "x", "x", "x", 'x', 'x');
 
-	public UserInterface(DataBaseHome data) {
-		user = new UserHome(data);
+	public UserInterface() {
+		user = new UserHome();
 	}
 
 	/**

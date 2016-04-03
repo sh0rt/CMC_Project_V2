@@ -117,13 +117,13 @@ public class CMCDriver{
    p("Logging out of the system");
    user = null;
    adminInterface = null;
-   userInterface = new UserInterface(dbhome);
+   userInterface = new UserInterface();
  }
   /**
   * Demonstrates user functionalities
   */
  public void demoUserFunctionalities(){
-  userInterface = new UserInterface(dbhome);
+  userInterface = new UserInterface();
    p("User Functionality demo");
    p("User has the ability to: log in");
    p("submitting improper credentials 'u' and 'pass'");

@@ -34,4 +34,15 @@ public class UserHome {
 	public User login(String username, String password) {
 		return database.login(username, password);
 	}
+	/**
+	 * Logs user on with parameters
+	 * 
+	 * @param username,
+	 *            password
+	 * @return successful login
+	 */
+	public static User Login(String username, String password) {
+		DataBaseHome db = new DataBaseHome();
+		return db.login(username, password);
+	}
 }

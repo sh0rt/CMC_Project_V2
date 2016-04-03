@@ -18,8 +18,8 @@ public class AdminInterfaceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		User =  Userhome.Login("ImadUser", "Edited");
-		admin = new AdminInterface();
+		user =  UserHome.Login("ImadUser", "Edited");
+		admin = new AdminInterface(user);
 		data1 = new DataBaseHome();
 		
 	}
@@ -50,19 +50,29 @@ public class AdminInterfaceTest {
 
 	@Test
 	public void testViewSchoolWithValidID() {
-		School school = admin.getSchools().get(ID);
-		String temp = admin.viewSchool();
-		assertTrue("Valid ID school is not working in viewSchool()", temp.contains(school.getName()&&school.getState()&&school.getControl()&&school.getEmphasis()
-				&&school.getExpenses()&&school.getLocation()&&school.getNumApplicants()&&school.getNumStudents()&&school.getPercentAdmitted()&&school.getAcademicScale()
-				&&school.getPercentEnrolled()&&school.getPercentFemale()&&school.getPercentFinAid()&&school.getQualOfLife()&&school.getSatMath()&&school.getSatVerbal()
-				&&school.getSocialscale()));
+		ArrayList<School> schools = data1.getSchools();
+		String school = admin.viewSchool(0);
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(schools.get(0).getSchool()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(schools.get(0).getState()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(schools.get(0).getControl()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getExpenses()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(schools.get(0).getLocation()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getNumApplicants()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getNumStudents()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getPercentAdmitted()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getAcademicScale()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getPercentEnrolled()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getPercentFemale()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getPercentFinAid()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getQualOfLife()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getSatMath()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getSatVerbal()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getSocialscale()));
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testViewSchoolWithInvalidID() {
-		School school = admin.getSchools().get(ID);
-		String temp =  admin.viewSchool(ID);
-		assertTrue("Invalid ID school is not working in viewSchool()", temp.contains())
+		admin.viewSchool(-3);
 	}
 
 	@Test

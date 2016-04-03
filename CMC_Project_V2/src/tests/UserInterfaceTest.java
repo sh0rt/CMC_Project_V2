@@ -1,4 +1,4 @@
-package csci230.dropdatabase;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -8,17 +8,18 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
+import CMC_Classes.*;
 public class UserInterfaceTest {
 	UserInterface user;
 	User user2;
 	UserHome home;
+	
 	@Before
 	public void setUp() throws Exception {
 		user = new UserInterface();
 	//ImadUser edited, 
 		home = new UserHome();
-		user2 = home.login("ImadUser", "Edited");
+		user2 = UserHome.Login("ImadUser", "Edited");
 	}
 //-----------------------------------------------------------------login--------------------------------------------------------------------------------------------------------------------------
 	@Test
