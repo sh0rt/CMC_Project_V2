@@ -17,6 +17,9 @@ public class SearchHomeTest {
 		School[] search = test.search(null, "Minnesota", null, null, null,
 				null, null, null, null, null, null, null, null, null,
 				null, null, null);
+		for(int i=0; i<search.length; i++){
+		  System.out.println(search[i].getName());
+		}
 	}
 
 	@Test 
