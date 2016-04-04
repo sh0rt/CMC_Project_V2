@@ -53,7 +53,7 @@ public class StudentUserInterfaceTest {
 	@Test
 	public void testSearch() {
 		Assert.assertTrue("Search yields Saint John's", sh.search("a",null,null,null,null,null,null,null,null,null
-				,null,null,null,null,null,null,null).contains("Saint Johns"));
+				,null,null,null,null,null,null,null).contains("University of Minnesota"));
 	}
 	
 	@Test
