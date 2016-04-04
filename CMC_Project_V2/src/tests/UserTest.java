@@ -119,22 +119,21 @@ public class UserTest {
 	@Test
 	public void testGetSchools() {
 		user1.addSchool(sju);
-		System.out.println(user1.getSchools().get(0).getName());
 		Assert.assertTrue("Get School returns Saint John's University.", user1.getSchools().get(0).getName().contains
 				("Saint John's"));
-		try{
-		user1.getSchools().get(0);
-		fail("getSchools failed");
-		}catch(IndexOutOfBoundsException ex){
+		//try{
+		//user1.getSchools().get(0);
+		//fail("getSchools failed");
+		//}catch(IndexOutOfBoundsException ex){
 			
-		}
+		//}
 
 	}
 
 	@Test
 	public void testGetID() {
-		Assert.assertTrue("user1 ID is 1", user1.getID() == 12);
-		Assert.assertTrue("user2 ID is 2", user2.getID() == 13);
-		Assert.assertTrue("user3 ID is 3", user3.getID() == 14);
+		Assert.assertTrue("user1 ID is 12", user1.getID() == 12);
+		Assert.assertTrue("user2 ID is 13", user2.getID() == 13);
+		Assert.assertTrue("user3 ID is 14", user3.getID() == 14);
 	}
 }
