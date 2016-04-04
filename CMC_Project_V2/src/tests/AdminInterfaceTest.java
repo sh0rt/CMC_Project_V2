@@ -25,11 +25,6 @@ public class AdminInterfaceTest {
 	}
 
 	@Test
-	public void testAdminInterface() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testViewSchools() {
 		ArrayList<School> schools = data1.getSchools();
 		String temp = admin.viewSchools();
@@ -39,35 +34,25 @@ public class AdminInterfaceTest {
 	}
 
 	@Test
-	public void testEditSchool() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testAddNewSchool() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testViewSchoolWithValidID() {
 		ArrayList<School> schools = data1.getSchools();
-		String school = admin.viewSchool(0);
-		assertTrue("Valid ID school is not working in viewSchool()", school.contains(schools.get(0).getSchool()));
-		assertTrue("Valid ID school is not working in viewSchool()", school.contains(schools.get(0).getState()));
-		assertTrue("Valid ID school is not working in viewSchool()", school.contains(schools.get(0).getControl()));
-		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getExpenses()));
-		assertTrue("Valid ID school is not working in viewSchool()", school.contains(schools.get(0).getLocation()));
-		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getNumApplicants()));
-		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getNumStudents()));
-		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getPercentAdmitted()));
-		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getAcademicScale()));
-		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getPercentEnrolled()));
-		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getPercentFemale()));
-		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getPercentFinAid()));
-		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getQualOfLife()));
-		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getSatMath()));
-		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getSatVerbal()));
-		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(0).getSocialscale()));
+		String school = admin.viewSchool(1);
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(schools.get(1).getSchool()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(schools.get(1).getState()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(schools.get(1).getControl()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(1).getExpenses()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(schools.get(1).getLocation()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(1).getNumApplicants()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(1).getNumStudents()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(1).getPercentAdmitted()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(1).getAcademicScale()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(1).getPercentEnrolled()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(1).getPercentFemale()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(1).getPercentFinAid()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(1).getQualOfLife()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(1).getSatMath()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(1).getSatVerbal()));
+		assertTrue("Valid ID school is not working in viewSchool()", school.contains(""+schools.get(1).getSocialscale()));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -81,7 +66,7 @@ public class AdminInterfaceTest {
 
 	@Test
 	public void testAddUser() {
-		fail("Not yet implemented");
+		assertTrue("add user passed",admin.addUser("Tyler", "weiss", "is", "cool", 'a').equals("Successfuly added Tyler to the system."));
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddUserInvalidFirstName() {
@@ -106,7 +91,7 @@ public class AdminInterfaceTest {
 
 	@Test
 	public void testEditUser() {
-		
+		assertTrue("add user passed",admin.editUser("Tyler", "weiss", "is", "cool", 'a','a').equals("Succesfully made changes to Tyler."));
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUserInvalidFirstName() {
@@ -136,7 +121,7 @@ public class AdminInterfaceTest {
 
 	@Test
 	public void testDeactivateUser() {
-		fail("Not yet implemented");
+		assertTrue("deactivate user failed",admin.deactivateUser(1).equals("Succesfully deactivated John."));
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testDeactivateUserInvalidIDNegative() {
@@ -147,15 +132,6 @@ public class AdminInterfaceTest {
 		admin.deactivateUser(0);
 	}
 
-	@Test
-	public void testViewUsers() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testViewUser() {
-		fail("Not yet implemented");
-	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testViewUserInvalidIDNegative() {
 		admin.viewUser(-3);

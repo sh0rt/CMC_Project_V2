@@ -77,6 +77,8 @@ public class AdminInterface {
 	 * @return school
 	 */
 	public String viewSchool(int ID) {
+		if(ID<=0 || ID >= admin.getSchools().size())
+			throw new IllegalArgumentException();
 		School school = admin.getSchools().get(ID);
 		String temp = "School: " + school.getSchool() + "\n" + "State: " + school.getState() + "\n" + "Location: "
 				+ school.getLocation() + "\n" + "control: " + school.getControl() + "\n" + "Number of Students; "
@@ -123,9 +125,10 @@ public class AdminInterface {
 	 * @return removed user
 	 */
 	public String deactivateUser(int id) {
+		if(id <= 0)
+			throw new IllegalArgumentException();
 		User user = admin.getUser(id);
-		admin.editUser(user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(), user.getType(),
-				'd');
+		admin.editUser(user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(), user.getType(),'d');
 		return "Succesfully deactivated " + user.getFirstName() + ".";
 	}
 
@@ -150,6 +153,8 @@ public class AdminInterface {
 	 * @return user
 	 */
 	public String viewUser(int ID) {
+		if(ID<=0 || ID >= admin.getSchools().size())
+			throw new IllegalArgumentException();
 		String type, status;
 		User user = admin.getUsers().get(ID);
 		if (user.getType() == 'a')
