@@ -9,7 +9,7 @@ package CMC_Classes;
 import java.util.*;
 //REMIND TYLER TO FINISH THIS RIGHT HEREEEEEEEEE!!!!!!!
 public class StudentHome {
-//USE THE DATABASE SO WHEN STUDNET ADDS STUFF IT ALSO GOES TO DATABASE EVERY TIME!!!!!
+//USE THE DATABASE SO WHEN STUDENT ADDS STUFF IT ALSO GOES TO DATABASE EVERY TIME!!!!!
 	private User user;
 	//private DataBaseHome database;
 	private SearchHome search;

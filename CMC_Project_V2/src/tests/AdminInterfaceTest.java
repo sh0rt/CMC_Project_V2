@@ -85,23 +85,23 @@ public class AdminInterfaceTest {
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddUserInvalidFirstName() {
-		user.addUser("", "Rahal", "ImadUser", "Edited", 'u');
+		admin.addUser("", "Rahal", "ImadUser", "Edited", 'u');
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddUserInvalidLastName() {
-		user.addUser("Imad", "", "ImadUser", "Edited", 'u');
+		admin.addUser("Imad", "", "ImadUser", "Edited", 'u');
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddUserInvalidUsername() {
-		user.addUser("Imad", "Rahal", "", "Edited", 'u');
+		admin.addUser("Imad", "Rahal", "", "Edited", 'u');
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddUserInvalidPassword() {
-		user.addUser("Imad", "Rahal", "ImadUser", "", 'u');
+		admin.addUser("Imad", "Rahal", "ImadUser", "", 'u');
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddUserInvalidType() {
-		user.addUser("Imad", "Rahal", "ImadUser", "Edited", "");
+		admin.addUser("Imad", "Rahal", "ImadUser", "Edited", ' ');
 	}
 
 	@Test
@@ -110,27 +110,27 @@ public class AdminInterfaceTest {
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUserInvalidFirstName() {
-		user.editUser("", "Rahal", "ImadUser", "Edited", 'u', 'Y');
+		admin.editUser("", "Rahal", "ImadUser", "Edited", 'u', 'Y');
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUserInvalidLastName() {
-		user.editUser("Imad", "", "ImadUser", "Edited", 'u', 'Y');
+		admin.editUser("Imad", "", "ImadUser", "Edited", 'u', 'Y');
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUserInvalidUsername() {
-		user.editUser("Imad", "Rahal", "", "Edited", 'u', 'Y');
+		admin.editUser("Imad", "Rahal", "", "Edited", 'u', 'Y');
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUserInvalidPassword() {
-		user.editUser("Imad", "Rahal", "ImadUser", "", 'u', 'Y');
+		admin.editUser("Imad", "Rahal", "ImadUser", "", 'u', 'Y');
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUserInvalidType() {
-		user.editUser("Imad", "Rahal", "ImadUser", "Edited", "", 'Y');
+		admin.editUser("Imad", "Rahal", "ImadUser", "Edited", ' ', 'Y');
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUserInvalidStatus() {
-		user.editUser("Imad", "Rahal", "ImadUser", "Edited", 'u', ' ');
+		admin.editUser("Imad", "Rahal", "ImadUser", "Edited", 'u', ' ');
 	}
 
 
