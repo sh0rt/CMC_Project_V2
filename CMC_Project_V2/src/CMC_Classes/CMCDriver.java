@@ -149,7 +149,7 @@ public class CMCDriver{
    p("Database up");
    p("Adding users to the database");
       database.user_addUser("Tyler","Weiss","user","pass",'a');
-      //database.user_addUser("Connor","Lorsung","C","L",'s');
+      //database.user_addUser("Conor","Lorsung","C","L",'s');
       //database.user_addUser("Megan","Pekarek","M","P",'s');
       //database.user_addUser("Cassie","I'm_So_Sorry","c","l",'s');
       try{Thread.sleep(FUNCTION_SLEEP);}catch(InterruptedException ex){}

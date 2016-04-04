@@ -15,14 +15,15 @@ public class UserTest {
 	public void setUp() throws Exception {
 		user1 = new User("Conor", "Lorsung", "clorsung", "password", 'A', 'y');
 		user2 = new User("TheOther", "C-Lo", "another", "one", 'U', 'n');
-		user3 = new User("Jeff", "Bullhorn", "blankyboy", "password", 'A', 'y');
+		user3 = new User("Jeff", "Bullhorn", "jb", "password", 'A', 'y');
+		sju = new School("Saint John's University", null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	}
 	
 	@Test
 	public void testGetUsername() {
 		Assert.assertTrue("Get username for user1 is not working", user1.getUsername().equals("clorsung"));
 		Assert.assertTrue("Get username for user2 is not working", user2.getUsername().equals("another"));
-		Assert.assertTrue("Get username for user3 is not working", user3.getUsername().equals("blankyboy"));	
+		Assert.assertTrue("Get username for user3 is not working", user3.getUsername().equals("jb"));	
 	}
 	
 	@Test
@@ -114,7 +115,10 @@ public class UserTest {
 	
 	@Test
 	public void testGetSchools() {
-		Assert.assertTrue("Get School returns sju.", user1.getSchools().equals(null));
+		user1.addSchool(sju);
+		System.out.println(user1.getSchools().get(0).getName());
+		Assert.assertTrue("Get School returns Saint John's University.", user1.getSchools().get(0).getName().contains
+				("Saint John's"));
 	}
 
 	@Test
