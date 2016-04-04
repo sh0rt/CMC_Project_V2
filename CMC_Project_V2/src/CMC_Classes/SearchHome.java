@@ -60,6 +60,71 @@ public class SearchHome {
 			double[] percentFinAid, double[] percentAdmitted, double[] percentEnrolled, int[] academicScale,
 			int[] socialscale, int[] qualOfLife, String[] emphasis) {
 
+		try{
+		if(name.equals(""))
+			throw new IllegalArgumentException();
+		}catch(NullPointerException ex){}
+		try{
+		if( state.equals(""))
+			throw new IllegalArgumentException();
+		}catch(NullPointerException ex){}
+		try{
+		if( location.equals(""))
+			throw new IllegalArgumentException();
+		}catch(NullPointerException ex){}
+		try{
+		if( control.equals("") )
+			throw new IllegalArgumentException();
+		}catch(NullPointerException ex){}
+		try{
+	    if( numStudents[0] <0 || numStudents[0] > numStudents[1] )
+	    	throw new IllegalArgumentException();
+		}catch(NullPointerException ex){}
+	    try{
+		if( satVerbal[0] < 0 || satVerbal[1] > 800 || satVerbal[0] > satVerbal[1])
+			throw new IllegalArgumentException();
+		}catch(NullPointerException ex){}
+		try{
+		if( satMath[0] < 0 || satMath[1] > 800 || satMath[0] > satMath[1])
+			throw new IllegalArgumentException();
+		}catch(NullPointerException ex){}
+		try{
+		if( numApplicants[0] < 0  || numApplicants[0] > numApplicants[1])
+			throw new IllegalArgumentException();
+		}catch(NullPointerException ex){}
+		try{
+		if( percentFemale[0] < 0 || percentFemale[0] > percentFemale[1] || 100 < percentFemale[1] )
+			throw new IllegalArgumentException();
+		}catch(NullPointerException ex){}
+		try{
+		if( expenses[0] < 0 || expenses[0] > expenses[1])
+			throw new IllegalArgumentException();
+		}catch(NullPointerException ex){}
+		try{
+		if( percentFinAid[0] < 0 || percentFinAid[1] > 100 || percentFinAid[0] > percentFinAid[1])
+			throw new IllegalArgumentException();
+		}catch(NullPointerException ex){}
+		try{
+		if( percentAdmitted[0] < 0 || percentAdmitted[1] > 100 || percentAdmitted[0] > percentAdmitted[1])
+			throw new IllegalArgumentException();
+		}catch(NullPointerException ex){}
+		try{
+		if( percentEnrolled[0] < 0 || percentEnrolled[1] > 100 || percentEnrolled[0] > percentEnrolled[1])
+			throw new IllegalArgumentException();
+		}catch(NullPointerException ex){}
+		try{
+		if( academicScale[0] < 1 || academicScale[1] > 5 || academicScale[0] > academicScale[1])
+			throw new IllegalArgumentException();
+		}catch(NullPointerException ex){}
+		try{
+		if( qualOfLife[0] < 1 || qualOfLife[1] > 5 || qualOfLife[0] > qualOfLife[1])
+			throw new IllegalArgumentException();
+		}catch(NullPointerException ex){}
+		try{
+		if( socialscale[0] < 1 || socialscale[1] > 5 || socialscale[0] > socialscale[1])
+			throw new IllegalArgumentException();
+		}catch(NullPointerException ex){}
+		
 		School[] top = new School[5];
 		ArrayList<School> schools = database.getSchools();
 		int[][] tally = new int[schools.size()][17];
