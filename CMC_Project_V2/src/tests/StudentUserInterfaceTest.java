@@ -18,6 +18,7 @@ public class StudentUserInterfaceTest {
 	public void init() {
 		u.addSchool(s);
 		sh = new StudentUI(u);
+		sh.search("a", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 	}
 
 	@Test
@@ -51,8 +52,18 @@ public class StudentUserInterfaceTest {
 	
 	@Test
 	public void testSearch() {
-		Assert.assertTrue("Search yields Adelphi", sh.search("m",null,null,null,null,null,null,null,null,null
-				,null,null,null,null,null,null,null).equals("Adelphi"));
+		Assert.assertTrue("Search yields Adelphi", sh.search("a",null,null,null,null,null,null,null,null,null
+				,null,null,null,null,null,null,null).contains("Saint Johns"));
 	}
 	
+	@Test
+	public void testViewExpandedSchool() {
+		sh.viewExpandedSchool(0);
+	}
+	
+	@Test
+	public void testSaveSchool() {
+		System.out.println(sh.saveSchool(0));
+		Assert.assertTrue("Save School contains Saint John's University", sh.saveSchool(0).contains("Saint Johns"));
+	}
 }
