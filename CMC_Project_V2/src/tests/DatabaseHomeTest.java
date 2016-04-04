@@ -101,7 +101,7 @@ public class DatabaseHomeTest {
 	public void testIncorrectLoginUsername() {
 		try{
 			database.login("a","bbb").getUsername();
-			fail("incorrect login did not return null");
+			fail("incorrect login username did not return null");
 		}catch(NullPointerException ex){
 			
 		}
@@ -110,7 +110,7 @@ public class DatabaseHomeTest {
 	public void testIncorrectLoginPassword() {
 		try{
 			database.login("aaa","b").getUsername();
-			fail("incorrect login did not return null");
+			fail("incorrect login password did not return null");
 		}catch(NullPointerException ex){
 			
 		}

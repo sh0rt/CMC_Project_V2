@@ -160,8 +160,11 @@ public class SchoolTest {
 	}
 	@Test
 	public void testSetEmphasis() {
-		school1.addEmphasis("code");
+		String[] test = {"code", "computers", "stuff"};
+		school1.setEmphasis(test);
 		assertTrue("setEmphasis working", school1.getEmphasisString().contains("code"));
+		assertTrue("setEmphasis working", school1.getEmphasisString().contains("computers"));
+		assertTrue("setEmphasis working", school1.getEmphasisString().contains("stuff"));
 	}
 	//---------------------------------------------Test Failures------------------------------------------------
 	@Test(expected = IllegalArgumentException.class)
@@ -238,11 +241,11 @@ public class SchoolTest {
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void setUnderAcademicScale(){
-		school1.setPercentFemale(0);
+		school1.setAcademicScale(0);
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void setOverAcademicScale(){
-		school1.setPercentFemale(6);
+		school1.setAcademicScale(6);
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void setUnderSocialScale(){
@@ -264,4 +267,5 @@ public class SchoolTest {
 	public void setEmptyEmphasis() {
 		school1.setEmphasis(null);
 	}
+	
 }
