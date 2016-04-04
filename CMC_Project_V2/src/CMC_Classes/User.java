@@ -213,7 +213,7 @@ public class User {
 		for (int i = 0; i < schools.size(); i++) {
 			school.add(schools.get(i));
 		}
-		return school;
+		return schools;
 	}
 
 	/**
@@ -228,11 +228,9 @@ public class User {
 		else
 			return false;
 	}
+	
 	public boolean addSchool(School school){
-		for(int i=0; i<this.schools.size();i++)
-			if(schools.get(i).equals(school))
-				return false;
-		schools.add(school);
+		this.schools.add(school);
 		return true;
 	}
 	

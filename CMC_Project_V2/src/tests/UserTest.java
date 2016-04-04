@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import CMC_Classes.*;
+
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 public class UserTest {
 
@@ -114,7 +117,13 @@ public class UserTest {
 	
 	@Test
 	public void testGetSchools() {
-		Assert.assertTrue("Get School returns sju.", user1.getSchools().equals(null));
+		try{
+		user1.getSchools().get(0);
+		fail("getSchools failed");
+		}catch(IndexOutOfBoundsException ex){
+			
+		}
+
 	}
 
 	@Test
