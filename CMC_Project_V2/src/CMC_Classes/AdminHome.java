@@ -61,6 +61,11 @@ public class AdminHome {
 			double percentFemale, double satVerbal, double satMath, double expenses, double percentFinAid, int numApplicants,
 			double percentAdmitted, double percentEnrolled, int academicScale, int socialScale, int qualOflife,
 			String[] emphasis) {
+	  	  if(school.equals("") || state.equals("") || location.equals("") || control.equals("") || numStudents<=0 || percentFemale<0 || 
+				  percentFemale > 100 || satVerbal<=0 || satVerbal>800 || satMath<=0 || satMath>800 || expenses <= 0 || percentFinAid<=0 ||
+				  percentFinAid>100 || numApplicants<=0 || percentAdmitted <= 0 || percentAdmitted > 100 || percentEnrolled <= 0 || percentEnrolled > 100 ||
+				  academicScale<1 || academicScale>5 || socialScale>5 || socialScale<1 || qualOflife<1 || qualOflife>5)
+			  throw new IllegalArgumentException();
 		int i = 0;
 		while (i < schools.size() && !schools.get(i).getSchool().equals(school)) {
 			i++;
@@ -105,6 +110,12 @@ public class AdminHome {
 			double percentAdmitted, double percentEnrolled, int academicScale, int socialScale, int qualOflife,
 			String[] emphasis) {
 
+		  if(school.equals("") || state.equals("") || location.equals("") || control.equals("") || numStudents<=0 || percentFemale<0 || 
+				  percentFemale > 100 || satVerbal<=0 || satVerbal>800 || satMath<=0 || satMath>800 || expenses <= 0 || percentFinAid<=0 ||
+				  percentFinAid>100 || numApplicants<=0 || percentAdmitted <= 0 || percentAdmitted > 100 || percentEnrolled <= 0 || percentEnrolled > 100 ||
+				  academicScale<1 || academicScale>5 || socialScale>5 || socialScale<1 || qualOflife<1 || qualOflife>5)
+			  throw new IllegalArgumentException();
+		  
 		School temp = new School(school, state, location, control, numStudents, satVerbal, satMath, numApplicants,
 				percentFemale, expenses, percentFinAid, percentAdmitted, percentEnrolled, academicScale, socialScale,
 				qualOflife, emphasis);
@@ -140,6 +151,16 @@ public class AdminHome {
 	 * @return users
 	 */
 	public User addNewUser(String firstName, String lastName, String username, String password, char type) {
+    	if(type != 'a' && type != 's')
+    		throw new IllegalArgumentException("type is not a or s");
+    	else if(firstName.equals(""))
+    		throw new IllegalArgumentException("empty argument 1");
+    	else if(lastName.equals(""))
+    		throw new IllegalArgumentException("empty argument 2");
+    	else if(username.equals(""))
+    		throw new IllegalArgumentException("empty argument 3");
+    	else if(password.equals(""))
+    		throw new IllegalArgumentException("empty argument 4");
 		User temp = new User(firstName, lastName, username, password, type, 'a');
 		users.add(temp);
 		return temp;
@@ -153,6 +174,18 @@ public class AdminHome {
 	 * @return user
 	 */
 	public User editUser(String firstName, String lastName, String username, String password, char type, char status) {
+    	if(type != 'a' && type != 's')
+    		throw new IllegalArgumentException("type is not a or s");
+    	else if(firstName.equals(""))
+    		throw new IllegalArgumentException("empty argument 1");
+    	else if(lastName.equals(""))
+    		throw new IllegalArgumentException("empty argument 2");
+    	else if(username.equals(""))
+    		throw new IllegalArgumentException("empty argument 3");
+    	else if(password.equals(""))
+    		throw new IllegalArgumentException("empty argument 4");
+    	else if(status != 'a' && type != 'd')
+    		throw new IllegalArgumentException("empty argument 5");
 		int i = 0;
 		while (i < users.size() && users.get(i).getUsername().equals(username)) {
 			i++;
@@ -196,6 +229,8 @@ public class AdminHome {
 	 * @return users ID
 	 */
 	public User getUser(int ID) {
+		if(this.users.size() == ID || ID < 0)
+			throw new IllegalArgumentException();
 		return this.users.get(ID);
 	}
 

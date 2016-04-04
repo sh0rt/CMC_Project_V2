@@ -136,10 +136,8 @@ public class AdminHomeTest {
 	//--------------------------------------get Schools / users-----------------------------------------
 	@Test
 	public void testGetSchools() {
-		try{
-		test.getSchools().get(0).getSchool();
-		fail("schools list is populated");
-		}catch(NullPointerException ex){}
+		assertTrue("get schools failed front",test.getSchools().get(0).getSchool().equals("ABILENE CHRISTIAN UNIVERSITY"));
+		assertTrue("getSchools faile end",test.getSchools().get(test.getSchools().size() - 1).getSchool().equals("zzzUniversity of Minnesota test"));
 	}
 	@Test
 	public void testGetUsers(){
@@ -148,7 +146,7 @@ public class AdminHomeTest {
 	@Test 
 	public void testGetUser(){
 		assertTrue("get user with id failed front", test.getUser(0).getUsername().equals(frontUser.getUsername()));
-		assertTrue("get user with id failed end", test.getUser(test.getUsers().size()-1).getUsername().equals(frontUser.getUsername()));
+		assertTrue("get user with id failed end", test.getUser(test.getUsers().size()-1).getUsername().equals(enduser.getUsername()));
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetNegativeUserFails(){

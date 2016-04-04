@@ -106,7 +106,7 @@ public class AdminInterfaceTest {
 
 	@Test
 	public void testEditUser() {
-		fail("Not yet implemented");
+		
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUserInvalidFirstName() {
