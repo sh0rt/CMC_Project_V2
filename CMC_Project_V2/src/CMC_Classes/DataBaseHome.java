@@ -22,6 +22,7 @@ public User login(String username, String password){
   String[][] users = dummydatabase.user_getUsers();
     for(int i=0; i< users.length ; i++){
       //System.out.println(users[i][2] + " " + users[i][3]);
+    //	System.out.println(users[i][2] + " -- " + users[i][3]);
        if(username.equals(users[i][2]) && password.equals(users[i][3]))
          return new User(users[i][0], users[i][1], users[i][2], users[i][3], users[i][4].charAt(0),'a' );
   }
@@ -79,7 +80,7 @@ public User addUser(String firstname, String lastname, String username, String p
       if(id < 0)
     	  throw new IllegalArgumentException("id can not be less than 0");
       String[][] temp = dummydatabase.user_getUsers();
-      if(id> temp.length)
+      if(id >= temp.length)
     	  throw new IllegalArgumentException("id to large");
       dummydatabase.user_editUser(temp[id][2],temp[id][0],temp[id][1],temp[id][3],temp[id][4].charAt(0),'d');
                   return new User(temp[id][0],temp[id][1],temp[id][2],temp[id][3],temp[id][4].charAt(0),'d');

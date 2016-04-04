@@ -9,7 +9,7 @@ import CMC_Classes.*;
 
 public class DatabaseHomeTest {
 	DataBaseHome database;
-	User user1, user2, user3;
+	User user1, user2, user3, enduser, frontUser;
 	School school1, school2, school3;
 	String[] emphasis;
 	@Before
@@ -19,7 +19,8 @@ public class DatabaseHomeTest {
 		user1 = new User("Tyler", "Weiss", "tnweiss", "weiss", 'a','a');
 		user2 = new User("T-$", "Weiss", "ball", "isLife", 'a','a');
 		user3 = new User("T-Buckets", "Weiss", "get", "money", 'a','a');
-
+		enduser = new User("end", "user","zzz", "yyy", 'a', 'a');
+		frontUser = new User("front", "user","aaa", "bbb", 'a', 'a');
 		/*
 		database.addUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(), 
 				user1.getPassword(), user1.getType());
@@ -47,6 +48,8 @@ public class DatabaseHomeTest {
 				school3.getQualOfLife());
 		database.addUser(user2.getFirstName(), user2.getLastName(), user2.getUsername(), user2.getPassword(), user2.getType());
 		database.addUser(user3.getFirstName(), user3.getLastName(), user3.getUsername(), user3.getPassword(), user3.getType());
+		database.addUser(enduser.getFirstName(), enduser.getLastName(), enduser.getUsername(), enduser.getPassword(), enduser.getType());
+		database.addUser(frontUser.getFirstName(), frontUser.getLastName(), frontUser.getUsername(), frontUser.getPassword(), frontUser.getType());
 		}catch(IllegalArgumentException ex){
 			try{
 				database.addSchool(school3.getSchool(),school3.getState(),school3.getLocation(),
@@ -57,16 +60,27 @@ public class DatabaseHomeTest {
 						school3.getQualOfLife());
 				database.addUser(user2.getFirstName(), user2.getLastName(), user2.getUsername(), user2.getPassword(), user2.getType());
 				database.addUser(user3.getFirstName(), user3.getLastName(), user3.getUsername(), user3.getPassword(), user3.getType());
+				database.addUser(enduser.getFirstName(), enduser.getLastName(), enduser.getUsername(), enduser.getPassword(), enduser.getType());
+				database.addUser(frontUser.getFirstName(), frontUser.getLastName(), frontUser.getUsername(), frontUser.getPassword(), frontUser.getType());
 				}catch(IllegalArgumentException ex1){
 					try{
 						database.addUser(user2.getFirstName(), user2.getLastName(), user2.getUsername(), user2.getPassword(), user2.getType());
 						database.addUser(user3.getFirstName(), user3.getLastName(), user3.getUsername(), user3.getPassword(), user3.getType());
+						database.addUser(enduser.getFirstName(), enduser.getLastName(), enduser.getUsername(), enduser.getPassword(), enduser.getType());
+						database.addUser(frontUser.getFirstName(), frontUser.getLastName(), frontUser.getUsername(), frontUser.getPassword(), frontUser.getType());
 						}catch(IllegalArgumentException ex2){
 							try{
 								database.addUser(user3.getFirstName(), user3.getLastName(), user3.getUsername(), user3.getPassword(), user3.getType());
+								database.addUser(enduser.getFirstName(), enduser.getLastName(), enduser.getUsername(), enduser.getPassword(), enduser.getType());
+								database.addUser(frontUser.getFirstName(), frontUser.getLastName(), frontUser.getUsername(), frontUser.getPassword(), frontUser.getType());
 								}catch(IllegalArgumentException ex3){
+									try{
+								    database.addUser(enduser.getFirstName(), enduser.getLastName(), enduser.getUsername(), enduser.getPassword(), enduser.getType());
+									database.addUser(frontUser.getFirstName(), frontUser.getLastName(), frontUser.getUsername(), frontUser.getPassword(), frontUser.getType());
+									}catch(IllegalArgumentException ex4){
 									
 								}
+						    }
 						}
 				}
 		}
@@ -77,7 +91,11 @@ public class DatabaseHomeTest {
 	//----------------------------------------------------Login----------------------------------------------------------
 	@Test
 	public void testLoginSuccess() {
-		assertTrue("Login returned the incorrect user.",database.login("tnweiss", "weiss").equals(user1));
+		assertTrue("Login returned the incorrect username.",database.login("ball", "isLife").getUsername().equals(user2.getUsername()));
+		assertTrue("Login returned the incorrect user password.",database.login("ball", "isLife").getPassword().equals(user2.getPassword()));
+		assertTrue("Login returned the incorrect user first name.",database.login("ball", "isLife").getFirstName().equals(user2.getFirstName()));
+		assertTrue("Login returned the incorrect user last name.",database.login("ball", "isLife").getLastName().equals(user2.getLastName()));
+		assertTrue("Login returned the incorrect user type.",database.login("ball", "isLife").getType() == user2.getType());
 	}
 	@Test
 	public void testIncorrectLoginUsername() {
@@ -139,9 +157,8 @@ public class DatabaseHomeTest {
 	//-----------------------------------------------getUsers--------------------------------------------------------
 	@Test
 	public void testGetUsers() {
-		assertTrue("getUsers encountered a problem (user1).", database.getUsers().get(0).equals(user1));
-		assertTrue("getUsers encountered a problem (user2).", database.getUsers().get(1).equals(user2));
-		assertTrue("getUsers encountered a problem (user3).", database.getUsers().get(2).equals(user3));
+		assertTrue("getUsers encountered a problem (endUser).", database.getUsers().get(database.getUsers().size()-1).getUsername().equals(enduser.getUsername()));
+		assertTrue("getUsers encountered a problem (frontUser).", database.getUsers().get(0).getUsername().equals(frontUser.getUsername()));
 	}
 	//-----------------------------------------------editUsers-------------------------------------------------------
 	@Test
@@ -610,5 +627,7 @@ public class DatabaseHomeTest {
 		database.removeUser(user1.getUsername());
 		database.removeUser(user2.getUsername());
 		database.removeUser(user3.getUsername());
+		database.removeUser(enduser.getUsername());
+		database.removeUser(frontUser.getUsername());
 	}
 }
