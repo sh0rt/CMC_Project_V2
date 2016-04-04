@@ -58,7 +58,7 @@ public class AdminHome {
 	 * @return schools
 	 */
 	public School editSchool(String school, String state, String location, String control, int numStudents,
-			double percentFemale, int satVerbal, int satMath, double expenses, double percentFinAid, int numApplicants,
+			double percentFemale, double satVerbal, double satMath, double expenses, double percentFinAid, int numApplicants,
 			double percentAdmitted, double percentEnrolled, int academicScale, int socialScale, int qualOflife,
 			String[] emphasis) {
 		int i = 0;
@@ -68,6 +68,8 @@ public class AdminHome {
 		if (i == schools.size())
 			return null;
 		else {
+			database.editSchool(school, state,location, control, numStudents, percentFemale, satVerbal, satMath,
+				      expenses, percentFinAid, numApplicants, percentAdmitted, percentEnrolled, academicScale, socialScale, qualOflife,emphasis,0);
 			schools.get(i).setState(state);
 			schools.get(i).setLocation(location);
 			schools.get(i).setControl(control);
@@ -99,7 +101,7 @@ public class AdminHome {
 	 * @return schools
 	 */
 	public School addNewSchool(String school, String state, String location, String control, int numStudents,
-			double percentFemale, int satVerbal, int satMath, double expenses, double percentFinAid, int numApplicants,
+			double percentFemale, double satVerbal, double satMath, double expenses, double percentFinAid, int numApplicants,
 			double percentAdmitted, double percentEnrolled, int academicScale, int socialScale, int qualOflife,
 			String[] emphasis) {
 
