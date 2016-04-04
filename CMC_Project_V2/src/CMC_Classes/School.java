@@ -105,6 +105,7 @@ public class School {
 		this.academicScale = academicScale;
 		this.socialscale = socialscale;
 		this.qualOfLife = qualOfLife;
+		this.emphasis = new String[1];
 	}
 
 	/**
@@ -438,6 +439,8 @@ public class School {
 	 *            the emphasis to set
 	 */
 	public void setEmphasis(String[] emphasis) {
+		if(emphasis == null)
+			throw new IllegalArgumentException();
 		this.emphasis = emphasis;
 	}
 
@@ -461,6 +464,25 @@ public class School {
 	 *            is schools emphasis
 	 */
 	public void removeEmphasis(String emphasis) {
+		boolean found = false;
+		String[] temp = new String[this.emphasis.length-1];
+		for(int i=0; i<this.emphasis.length;i++){
+			if (this.emphasis[i] == emphasis || found){
+				found = true;
+				if(i<this.emphasis.length-2)
+					this.emphasis[i] = this.emphasis[i+1];
+			}else
+				this.emphasis[i]=this.emphasis[i];
+		}
+		if(found){
+			for(int i=0;i< this.emphasis.length;i++){
+				temp[i] = this.emphasis[i];
+			}
+			this.emphasis = temp;
+		}
+	}
+		
+		/*
 		boolean found = false;
 		try {
 			for (int i = 0; i < this.emphasis.length; i++) {
@@ -499,11 +521,7 @@ public class School {
 	 * @param name
 	 *            is name of school
 	 */
-	public void setSchool(String name) {
-		if(name.equals(""))
-			throw new IllegalArgumentException();
-		this.name = name;
-	}
+
 
 	/**
 	 * gets the schools name
@@ -515,6 +533,11 @@ public class School {
 	}
 	
 	public void addEmphasis(String emphasis){
-		this.emphasis[emphasis.length()] = emphasis;
+	    String[] temp = new String[this.emphasis.length];
+	    for(int i=0; i<this.emphasis.length; i++){
+	    	temp[i] = this.emphasis[i];
+	    }
+		temp[this.emphasis.length-1] = emphasis;
+		this.emphasis = temp;
 	}
 }

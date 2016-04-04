@@ -63,7 +63,8 @@ public class SearchHome {
 		School[] top = new School[5];
 		ArrayList<School> schools = database.getSchools();
 		int[][] tally = new int[schools.size()][17];
-
+		int[] tallys = new int[schools.size()];
+		
 		String[] s = new String[4]; // strings
 		s[0] = name;
 		s[1] = state;
@@ -86,6 +87,110 @@ public class SearchHome {
 		d[5] = percentAdmitted;
 		d[6] = percentEnrolled;
 
+		for (int t = 0; t < schools.size(); t++) {
+			try {
+				if (schools.get(t).getName().contains(s[0])) {
+					tallys[t] += 1;
+				}
+			} catch (NullPointerException ex) {
+			}
+			try {
+				if (schools.get(t).getState().contains(s[1])) {
+					tallys[t] += 1;
+				}
+			} catch (NullPointerException ex) {
+			}
+			try {
+				if (schools.get(t).getLocation().contains(s[2])) {
+					tallys[t] += 1;
+				}
+			} catch (NullPointerException ex) {
+			}
+			try {
+				if (schools.get(t).getControl().contains(s[3])) {
+					tallys[t] +=1;
+				}
+			} catch (NullPointerException ex) {
+			}
+
+			try {
+				if (i[0][0] < schools.get(t).getNumStudents() && schools.get(t).getNumStudents() < i[0][1]) {
+					tallys[t] += 1;
+				}
+			} catch (NullPointerException ex) {
+			}
+			try {
+				if (i[1][0] < schools.get(t).getNumStudents() && schools.get(t).getNumStudents() < i[1][1]) {
+					tallys[t] += 1;
+				}
+			} catch (NullPointerException ex) {
+			}
+			try {
+				if (i[2][0] < schools.get(t).getNumStudents() && schools.get(t).getNumStudents() < i[2][1]) {
+					tallys[t] += 1;
+				}
+			} catch (NullPointerException ex) {
+			}
+			try {
+				if (i[3][0] < schools.get(t).getNumStudents() && schools.get(t).getNumStudents() < i[3][1]) {
+					tallys[t] += 1;
+				}
+			} catch (NullPointerException ex) {
+			}
+			try {
+				if (i[4][0] < schools.get(t).getNumStudents() && schools.get(t).getNumStudents() < i[4][1]) {
+					tallys[t] += 1;
+				}
+			} catch (NullPointerException ex) {
+			}
+
+			try {
+				if (d[0][0] < schools.get(t).getNumStudents() && schools.get(t).getNumStudents() < d[0][1]) {
+					tallys[t] += 1;
+				}
+			} catch (NullPointerException ex) {
+			}
+			try {
+				if (d[1][0] < schools.get(t).getNumStudents() && schools.get(t).getNumStudents() < d[1][1]) {
+					tallys[t] += 1;
+				}
+			} catch (NullPointerException ex) {
+			}
+			try {
+				if (d[2][0] < schools.get(t).getNumStudents() && schools.get(t).getNumStudents() < d[2][1]) {
+					tallys[t] += 1;
+				}
+			} catch (NullPointerException ex) {
+			}
+			try {
+				if (d[3][0] < schools.get(t).getNumStudents() && schools.get(t).getNumStudents() < d[3][1]) {
+					tallys[t] += 1;
+				}
+			} catch (NullPointerException ex) {
+			}
+			try {
+				if (d[4][0] < schools.get(t).getNumStudents() && schools.get(t).getNumStudents() < d[4][1]) {
+					tallys[t] += 1;
+				}
+			} catch (NullPointerException ex) {
+			}
+			try {
+				if (d[5][0] < schools.get(t).getNumStudents() && schools.get(t).getNumStudents() < d[5][1]) {
+					tallys[t] += 1;
+				}
+			} catch (NullPointerException ex) {
+			}
+			try {
+				if (d[6][0] < schools.get(t).getNumStudents() && schools.get(t).getNumStudents() < d[6][1]) {
+					tallys[t] += 1;
+				}
+			} catch (NullPointerException ex) {
+			}
+		}
+		for (int t = 0; t < schools.size(); t++) {
+			
+		}
+		//------------------------------finish up here------------------------------------------------ ^^^^^^^^^^
 //		String[] em = emphasis;
 		for (int t = 0; t < schools.size(); t++) {
 			try {
