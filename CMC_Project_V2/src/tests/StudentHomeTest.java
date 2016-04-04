@@ -51,8 +51,10 @@ public class StudentHomeTest {
 
 	@Test
 	public void testSearch() {
-		assertTrue("Search yields Adelphi", sh.search("a",null,null,null,null,null,null,null,null,null
-				,null,null,null,null,null,null,null)[0].getName().contains("Saint Johns"));
+		//System.out.println(sh.search("ARIZONA",null,null,null,null,null,null,null,null,null
+		//		,null,null,null,null,null,null,null)[0].getName());
+		assertTrue("Search yields Adelphi", sh.search("ARIZONA",null,null,null,null,null,null,null,null,null
+				,null,null,null,null,null,null,null)[0].getName().contains("ARIZONA STATE"));
 	}
 
 	@Test
@@ -63,8 +65,8 @@ public class StudentHomeTest {
 
 	@Test
 	public void testGetSearch() {
-		sh.search("a", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-		assertTrue("Get search returns top 5 results.", sh.getSearch()[0].getName().contains("Saint Johns"));
+		sh.search( null, "MINNESOTA", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)[0].getName();
+		assertTrue("Get search returns top 5 results.", sh.getSearch()[0].getName().equals("AUGSBURG"));
 	}
 
 	@Test
