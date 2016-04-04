@@ -206,7 +206,8 @@ public class DatabaseHomeTest {
 	@Test
 	public void testDeactivateUser() {
 		user2.setStatus('d');
-		assertTrue("Deactivation error.", database.deactivateUser(0).equals(user2));
+		assertTrue("Deactivation error.", database.deactivateUser(0).getUsername().equals(frontUser.getUsername()));
+		assertTrue("Deactivation error.", database.deactivateUser(0).getStatus() == 'd');
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testDeactivateUserFailsForNegativeInteger() {
