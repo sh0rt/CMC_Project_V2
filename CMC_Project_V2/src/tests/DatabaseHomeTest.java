@@ -100,7 +100,7 @@ public class DatabaseHomeTest {
 	@Test
 	public void testIncorrectLoginUsername() {
 		try{
-			User use = database.login("tweiss","weiss");
+			database.login("a","bbb").getUsername();
 			fail("incorrect login did not return null");
 		}catch(NullPointerException ex){
 			
@@ -109,7 +109,7 @@ public class DatabaseHomeTest {
 	@Test
 	public void testIncorrectLoginPassword() {
 		try{
-			User use = database.login("tnweiss","we");
+			database.login("aaa","b").getUsername();
 			fail("incorrect login did not return null");
 		}catch(NullPointerException ex){
 			
@@ -215,7 +215,7 @@ public class DatabaseHomeTest {
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testDeactivateUserFailsForIntegerOutOfRange() {
-		database.deactivateUser(7);
+		database.deactivateUser(database.getUsers().size());
 	}
     //----------------------------------------------addSchool--------------------------------------------------------
 	//String school, String state, String location, String control, int numStudents,
