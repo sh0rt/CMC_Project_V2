@@ -29,7 +29,7 @@ public User login(String username, String password){
 }
 
 public User addUser(String firstname, String lastname, String username, String password, char type){
-	if(type != 'a' || type != 's')
+	if(type != 'a' && type != 'u')
 		throw new IllegalArgumentException("type is not a or s");
 	else if(firstname.equals(""))
 		throw new IllegalArgumentException("empty argument");
@@ -42,7 +42,8 @@ public User addUser(String firstname, String lastname, String username, String p
 	else if(type == ' ')
 		throw new IllegalArgumentException("empty argument");
 	
-  dummydatabase.user_addUser(firstname,lastname,username,password, type);
+  if(dummydatabase.user_addUser(firstname,lastname,username,password, type) == -1)
+	  throw new IllegalArgumentException("User couldnt be added to the system");
   return new User(firstname,lastname,username,password, type,'a');
 }
     public ArrayList<User> getUsers(){
@@ -56,20 +57,21 @@ public User addUser(String firstname, String lastname, String username, String p
     }
     
     public User editUser(String firstname, String lastname, String username, String password, char type,char status){
-    	if(type != 'a' || type != 's')
+    	if(type != 'a' && type != 's')
     		throw new IllegalArgumentException("type is not a or s");
     	else if(firstname.equals(""))
-    		throw new IllegalArgumentException("empty argument");
+    		throw new IllegalArgumentException("empty argument 1");
     	else if(lastname.equals(""))
-    		throw new IllegalArgumentException("empty argument");
+    		throw new IllegalArgumentException("empty argument 2");
     	else if(username.equals(""))
-    		throw new IllegalArgumentException("empty argument");
+    		throw new IllegalArgumentException("empty argument 3");
     	else if(password.equals(""))
-    		throw new IllegalArgumentException("empty argument");
-    	else if(type != 'a' || type != 's')
-    		throw new IllegalArgumentException("empty argument");
+    		throw new IllegalArgumentException("empty argument 4");
+    	else if(status != 'a' && type != 'd')
+    		throw new IllegalArgumentException("empty argument 5");
     	
-      dummydatabase.user_editUser(firstname,lastname,username,password, type,status);
+      if(dummydatabase.user_editUser(username, firstname,lastname,password, type,status) == 0)
+    	  throw new IllegalArgumentException("user not found in the database");
       return new User(firstname,lastname,username,password,type,status);
     }
     
@@ -87,7 +89,7 @@ public User addUser(String firstname, String lastname, String username, String p
       String[][] temp = dummydatabase.university_getUniversities();
       ArrayList<School> ret = new ArrayList<School>();
       
-      for(int i=0; i<temp.length; i++){
+      for(int i=1; i<temp.length; i++){
         ret.add( new School(temp[i][0],temp[i][1],temp[i][2],temp[i][3],Integer.parseInt(temp[i][4]),Double.parseDouble(temp[i][5]),Double.parseDouble(temp[i][6]),
                             Double.parseDouble(temp[i][7]),Double.parseDouble(temp[i][8]),Double.parseDouble(temp[i][9]),Integer.parseInt(temp[i][10]),
                             Double.parseDouble(temp[i][11]),Double.parseDouble(temp[i][12]),Integer.parseInt(temp[i][13]),
@@ -108,9 +110,16 @@ public User addUser(String firstname, String lastname, String username, String p
     public School editSchool(String school,String state, String location, String control, int numStudents, double percentFemale, double satVerbal, double satMath,
                            double expenses, double percentFinAid, int numApplicants, double percentAdmitted, double percentEnrolled, int academicScale,
                            int socialScale, int qualOflife, String[] emphasis, int id){
+    	
+  	  if(school.equals("") || state.equals("") || location.equals("") || control.equals("") || numStudents<=0 || percentFemale<0 || 
+			  percentFemale > 100 || satVerbal<=0 || satVerbal>800 || satMath<=0 || satMath>800 || expenses <= 0 || percentFinAid<=0 ||
+			  percentFinAid>100 || numApplicants<=0 || percentAdmitted <= 0 || percentAdmitted > 100 || percentEnrolled <= 0 || percentEnrolled > 100 ||
+			  academicScale<1 || academicScale>5 || socialScale>5 || socialScale<1 || qualOflife<1 || qualOflife>5)
+		  throw new IllegalArgumentException();
       
-   dummydatabase.university_editUniversity(school, state,location, control, numStudents, percentFemale, satVerbal, satMath,
-      expenses, percentFinAid, numApplicants, percentAdmitted, percentEnrolled, academicScale, socialScale, qualOflife);
+   if(dummydatabase.university_editUniversity(school, state,location, control, numStudents, percentFemale, satVerbal, satMath,
+      expenses, percentFinAid, numApplicants, percentAdmitted, percentEnrolled, academicScale, socialScale, qualOflife) == -1)
+	   throw new IllegalArgumentException("university could not be changed in the database");
   
       String[][] temp = dummydatabase.university_getEmphases();
       for(int i=0; i<temp[id].length; i++){
@@ -129,10 +138,16 @@ public User addUser(String firstname, String lastname, String username, String p
 			double percentFemale, double satVerbal, double satMath, double expenses, double percentFinAid, int numApplicants,
 			double percentAdmitted, double percentEnrolled, int academicScale, int socialScale, int qualOflife
 			){
+	  if(school.equals("") || state.equals("") || location.equals("") || control.equals("") || numStudents<=0 || percentFemale<0 || 
+			  percentFemale > 100 || satVerbal<=0 || satVerbal>800 || satMath<=0 || satMath>800 || expenses <= 0 || percentFinAid<=0 ||
+			  percentFinAid>100 || numApplicants<=0 || percentAdmitted <= 0 || percentAdmitted > 100 || percentEnrolled <= 0 || percentEnrolled > 100 ||
+			  academicScale<1 || academicScale>5 || socialScale>5 || socialScale<1 || qualOflife<1 || qualOflife>5)
+		  throw new IllegalArgumentException();
 	  
-	  dummydatabase.university_addUniversity(school, state, location, control, numStudents,percentFemale, satVerbal, satMath, expenses,
+	  if(dummydatabase.university_addUniversity(school, state, location, control, numStudents,percentFemale, satVerbal, satMath, expenses,
 			  percentFinAid, numApplicants, percentAdmitted, percentEnrolled, academicScale, socialScale,
-				qualOflife);
+				qualOflife) == -1)
+		  throw new IllegalArgumentException("add university error in database home");
 	  
 	  return new School(school, state, location, control, numStudents,percentFemale, satVerbal, satMath, expenses,
 			  percentFinAid, numApplicants, percentAdmitted, percentEnrolled, academicScale, socialScale,
@@ -141,6 +156,9 @@ public User addUser(String firstname, String lastname, String username, String p
   //ants, double percentAdmitted, double percentEnrolled, int academicsScale, int socialScale, int qualityOfLifeScale)
     public void removeSchool(String name){
     	dummydatabase.university_deleteUniversity(name);
+    }
+    public void removeUser(String name){
+    	dummydatabase.user_deleteUser(name);
     }
 }
 

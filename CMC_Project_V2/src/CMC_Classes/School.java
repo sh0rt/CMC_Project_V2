@@ -499,11 +499,7 @@ public class School {
 	 * @param name
 	 *            is name of school
 	 */
-	public void setSchool(String name) {
-		if(name.equals(""))
-			throw new IllegalArgumentException();
-		this.name = name;
-	}
+
 
 	/**
 	 * gets the schools name

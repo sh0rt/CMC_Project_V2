@@ -19,6 +19,7 @@ public class DatabaseHomeTest {
 		user1 = new User("Tyler", "Weiss", "tnweiss", "weiss", 'a','a');
 		user2 = new User("T-$", "Weiss", "ball", "isLife", 'a','a');
 		user3 = new User("T-Buckets", "Weiss", "get", "money", 'a','a');
+
 		/*
 		database.addUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(), 
 				user1.getPassword(), user1.getType());
@@ -27,10 +28,11 @@ public class DatabaseHomeTest {
 		database.addUser(user3.getFirstName(), user3.getLastName(), user3.getUsername(), 
 				user3.getPassword(), user3.getType());
 				*/
-		school1 = new School("Saint Johns University","Minnesota", "SMALL-CITY", "PRIVATE", 5000, .5, 20,30,5000.0,.3,1000,.5,.3,4,3,5);
-		school2 = new School("University of Minnesota Duluth","Minnesota", "UNKNOWN", "STATE", 50000, .7, 20,30,5000.0,.3,1000,.5,.3,4,3,5);
-		school3 = new School("University of Minnesota","Minnesota", "URBAN", "UNKNOWN", 500000, .45, 20,30,5000.0,.3,1000,.5,.3,4,3,5);
+		school1 = new School("Saint Johns University test","Minnesota", "SMALL-CITY", "PRIVATE", 5000, .5, 20,30,5000.0,.3,1000,.5,.3,4,3,5);
+		school2 = new School("University of Minnesota Duluth test","Minnesota", "UNKNOWN", "STATE", 50000, .7, 20,30,5000.0,.3,1000,.5,.3,4,3,5);
+		school3 = new School("zzzUniversity of Minnesota test","Minnesota", "URBAN", "UNKNOWN", 500000, .45, 20,30,5000.0,.3,1000,.5,.3,4,3,5);
 		//String[] emphasis = new String[3];
+		try{
 		database.addSchool(school2.getSchool(),school2.getState(),school2.getLocation(),
 				school2.getControl(),school2.getNumStudents(),school2.getPercentFemale(),
 			    school2.getSatVerbal(),school2.getSatMath(),school2.getExpenses(),
@@ -43,6 +45,31 @@ public class DatabaseHomeTest {
 				school3.getPercentFinAid(),school3.getNumApplicants(),school3.getPercentAdmitted(),
 				school3.getPercentEnrolled(),school3.getAcademicScale(),school3.getSocialscale(),
 				school3.getQualOfLife());
+		database.addUser(user2.getFirstName(), user2.getLastName(), user2.getUsername(), user2.getPassword(), user2.getType());
+		database.addUser(user3.getFirstName(), user3.getLastName(), user3.getUsername(), user3.getPassword(), user3.getType());
+		}catch(IllegalArgumentException ex){
+			try{
+				database.addSchool(school3.getSchool(),school3.getState(),school3.getLocation(),
+						school3.getControl(),school3.getNumStudents(),school3.getPercentFemale(),
+					    school3.getSatVerbal(),school3.getSatMath(),school3.getExpenses(),
+						school3.getPercentFinAid(),school3.getNumApplicants(),school3.getPercentAdmitted(),
+						school3.getPercentEnrolled(),school3.getAcademicScale(),school3.getSocialscale(),
+						school3.getQualOfLife());
+				database.addUser(user2.getFirstName(), user2.getLastName(), user2.getUsername(), user2.getPassword(), user2.getType());
+				database.addUser(user3.getFirstName(), user3.getLastName(), user3.getUsername(), user3.getPassword(), user3.getType());
+				}catch(IllegalArgumentException ex1){
+					try{
+						database.addUser(user2.getFirstName(), user2.getLastName(), user2.getUsername(), user2.getPassword(), user2.getType());
+						database.addUser(user3.getFirstName(), user3.getLastName(), user3.getUsername(), user3.getPassword(), user3.getType());
+						}catch(IllegalArgumentException ex2){
+							try{
+								database.addUser(user3.getFirstName(), user3.getLastName(), user3.getUsername(), user3.getPassword(), user3.getType());
+								}catch(IllegalArgumentException ex3){
+									
+								}
+						}
+				}
+		}
 	}
 	//String school, String state, String location, String control, int numStudents,
 	//double percentFemale, int satVerbal, int satMath, double expenses, double percentFinAid, int numApplicants,
@@ -54,11 +81,21 @@ public class DatabaseHomeTest {
 	}
 	@Test
 	public void testIncorrectLoginUsername() {
-		assertTrue("Login returned a user that is was not supposed to (incorrect username).",database.login("tweiss", "weiss").equals(null));
+		try{
+			User use = database.login("tweiss","weiss");
+			fail("incorrect login did not return null");
+		}catch(NullPointerException ex){
+			
+		}
 	}
 	@Test
 	public void testIncorrectLoginPassword() {
-		assertTrue("Login returned a user that is was not supposed to (incorrect password).",database.login("tweiss", "eiss").equals(null));
+		try{
+			User use = database.login("tnweiss","we");
+			fail("incorrect login did not return null");
+		}catch(NullPointerException ex){
+			
+		}
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyLoginUsername() {
@@ -71,9 +108,8 @@ public class DatabaseHomeTest {
 	//---------------------------------------------------addUser----------------------------------------------------------
 	@Test
 	public void testAddUser() {
-		user1.setFirstName("t");
-		assertTrue("DatabaseHome encountered an error changing users first name.",database.addUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(), 
-				user1.getPassword(), user1.getType()).equals(user1));
+		assertTrue("DatabaseHome encountered an error adding user.",database.addUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(), 
+				user1.getPassword(), user1.getType()).getUsername().equals(user1.getUsername()));
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddUserWithTypeNotAorS() {
@@ -110,21 +146,18 @@ public class DatabaseHomeTest {
 	//-----------------------------------------------editUsers-------------------------------------------------------
 	@Test
 	public void testEditUser() {
-		user1.setFirstName("t");
-		assertTrue("DatabaseHome encountered an error editing user firstname",database.editUser("t", user1.getLastName(), user1.getUsername(), 
-				user1.getPassword(), user1.getType() , 'a').equals(user1));
-		user1.setLastName("t");
-		assertTrue("DatabaseHome encountered an error editing user lastname.",database.editUser(user1.getFirstName(), "t", user1.getUsername(), 
-				user1.getPassword(), user1.getType(), 'a').equals(user1));
-		user1.setUsername("t");
-		assertTrue("DatabaseHome encountered an error editing user username.",database.editUser(user1.getFirstName(), user1.getLastName(), " ", 
-				user1.getPassword(), user1.getType(),'a').equals(user1));
-		user1.setPassword("t");
-		assertTrue("DatabaseHome encountered an error editing user password.",database.editUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(), 
-				"t", user1.getType(),'a').equals(user1));
-		user1.setType('s');
-		assertTrue("DatabaseHome encountered an error editing user type.",database.editUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(), 
-				user1.getPassword(), 's','a').equals(user1));
+		user3.setFirstName("t");
+		assertTrue("DatabaseHome encountered an error editing user firstname",database.editUser("t", user3.getLastName(), user3.getUsername(), 
+				user3.getPassword(), user3.getType() , 'a').getFirstName().equals(user3.getFirstName()));
+		user3.setLastName("t");
+		assertTrue("DatabaseHome encountered an error editing user lastname.",database.editUser(user3.getFirstName(), "t", user3.getUsername(), 
+				user3.getPassword(), user3.getType(), 'a').getLastName().equals(user3.getLastName()));
+		user3.setPassword("t");
+		assertTrue("DatabaseHome encountered an error editing user password.",database.editUser(user3.getFirstName(), user3.getLastName(), user3.getUsername(), 
+				"t", user3.getType(),'a').getPassword().equals(user3.getPassword()));
+		user3.setType('s');
+		assertTrue("DatabaseHome encountered an error editing user type.",database.editUser(user3.getFirstName(), user3.getLastName(), user3.getUsername(), 
+				user3.getPassword(), 's','a').getType() == user3.getType());
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUserWithTypeNotAorS() {
@@ -177,7 +210,7 @@ public class DatabaseHomeTest {
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
 				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
-				school1.getQualOfLife()).equals(school1));
+				school1.getQualOfLife()).getName().equals("Saint Johns University test"));
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddSchoolWithEmptyName(){
@@ -219,15 +252,6 @@ public class DatabaseHomeTest {
 	public void testAddSchoolWithEmptyNumStudents(){
 		database.addSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
 				school1.getControl(),0,school1.getPercentFemale(),
-			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
-				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
-				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
-				school1.getQualOfLife());
-	}
-	@Test(expected = IllegalArgumentException.class)
-	public void testAddSchoolWithEmptyPercentFemale(){
-		database.addSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
-				school1.getControl(),school1.getNumStudents(),0,
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
 				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
@@ -332,24 +356,52 @@ public class DatabaseHomeTest {
 	@Test
 	public void testEditSchool(){
 		String[] emphasis = new String[2];
-		school1.setState("test");
-		school1.setLocation("test");
-		school1.setControl("test");
-		school1.setNumStudents(1);
-		school1.setPercentFemale(0.1);
-		school1.setSatVerbal(300.0);
-		school1.setSatMath(300.0);
-		school1.setExpenses(1000.0);
-		school1.setPercentFinAid(0.1);
-		school1.setNumApplicants(1);
-		school1.setPercentAdmitted(0.1);
-		school1.setPercentEnrolled(0.1);
-		school1.setAcademicScale(1);
-		school1.setSocialscale(1);
-		school1.setQualOfLife(1);
-		school1.setEmphasis(emphasis);
-		assertTrue("edit school method fault",database.editSchool("test","test","test",
-				"test",1,.1,300.0,300.0,1000.0,.1,1,.1,.1,1,1,1,emphasis,0).equals(school1.getState()));
+		school3.setState("test");
+		school3.setLocation("test");
+		school3.setControl("test");
+		school3.setNumStudents(1);
+		school3.setPercentFemale(0.1);
+		school3.setSatVerbal(300.0);
+		school3.setSatMath(300.0);
+		school3.setExpenses(1000.0);
+		school3.setPercentFinAid(0.1);
+		school3.setNumApplicants(1);
+		school3.setPercentAdmitted(0.1);
+		school3.setPercentEnrolled(0.1);
+		school3.setAcademicScale(1);
+		school3.setSocialscale(1);
+		school3.setQualOfLife(1);
+		school3.setEmphasis(emphasis);
+		assertTrue("edit school method fault",database.editSchool(school3.getName(),"test","test",
+				"test",1,.1,300.0,300.0,1000.0,.1,1,.1,.1,1,1,1,emphasis,0).getState().equals("test"));
+		assertTrue("edit school method fault",database.editSchool(school3.getName(),"test","test",
+				"test",1,.1,300.0,300.0,1000.0,.1,1,.1,.1,1,1,1,emphasis,0).getLocation().equals("test"));
+		assertTrue("edit school method fault",database.editSchool(school3.getName(),"test","test",
+				"test",1,.1,300.0,300.0,1000.0,.1,1,.1,.1,1,1,1,emphasis,0).getControl().equals("test"));
+		assertTrue("edit school method fault",database.editSchool(school3.getName(),"test","test",
+				"test",1,.1,300.0,300.0,1000.0,.1,1,.1,.1,1,1,1,emphasis,0).getNumStudents() == 1);
+		assertTrue("edit school method fault",database.editSchool(school3.getName(),"test","test",
+				"test",1,.1,300.0,300.0,1000.0,.1,1,.1,.1,1,1,1,emphasis,0).getPercentFemale() == .1);
+		assertTrue("edit school method fault",database.editSchool(school3.getName(),"test","test",
+				"test",1,.1,300.0,300.0,1000.0,.1,1,.1,.1,1,1,1,emphasis,0).getSatVerbal() == 300.0);
+		assertTrue("edit school method fault",database.editSchool(school3.getName(),"test","test",
+				"test",1,.1,300.0,300.0,1000.0,.1,1,.1,.1,1,1,1,emphasis,0).getSatMath() == 300.0);
+		assertTrue("edit school method fault",database.editSchool(school3.getName(),"test","test",
+				"test",1,.1,300.0,300.0,1000.0,.1,1,.1,.1,1,1,1,emphasis,0).getExpenses() == 1000.0);
+		assertTrue("edit school method fault",database.editSchool(school3.getName(),"test","test",
+				"test",1,.1,300.0,300.0,1000.0,.1,1,.1,.1,1,1,1,emphasis,0).getPercentFinAid() == .1);
+		assertTrue("edit school method fault",database.editSchool(school3.getName(),"test","test",
+				"test",1,.1,300.0,300.0,1000.0,.1,1,.1,.1,1,1,1,emphasis,0).getNumApplicants() == 1);
+		assertTrue("edit school method fault",database.editSchool(school3.getName(),"test","test",
+				"test",1,.1,300.0,300.0,1000.0,.1,1,.1,.1,1,1,1,emphasis,0).getPercentAdmitted() == .1);
+		assertTrue("edit school method fault",database.editSchool(school3.getName(),"test","test",
+				"test",1,.1,300.0,300.0,1000.0,.1,1,.1,.1,1,1,1,emphasis,0).getPercentEnrolled() == .1);
+		assertTrue("edit school method fault",database.editSchool(school3.getName(),"test","test",
+				"test",1,.1,300.0,300.0,1000.0,.1,1,.1,.1,1,1,1,emphasis,0).getAcademicScale() == 1);
+		assertTrue("edit school method fault",database.editSchool(school3.getName(),"test","test",
+				"test",1,.1,300.0,300.0,1000.0,.1,1,.1,.1,1,1,1,emphasis,0).getSocialscale() == 1);
+		assertTrue("edit school method fault",database.editSchool(school3.getName(),"test","test",
+				"test",1,.1,300.0,300.0,1000.0,.1,1,.1,.1,1,1,1,emphasis,0).getQualOfLife() == 1);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -544,9 +596,10 @@ public class DatabaseHomeTest {
 	//-------------------------------------------getSchools-----------------------------------------
 	@Test
 	public void testGetSchools(){
-		ArrayList<School> array = new ArrayList<School>();
-		assertTrue("School1 not found in getSchoo2",array.get(0).equals(school2));
-		assertTrue("School1 not found in getSchoo3",array.get(1).equals(school3));	
+		ArrayList<School> array = database.getSchools();
+	    System.out.println(array.get(array.size()-1).getName());
+		assertTrue("School1 not found in getSchool2",array.get(0).getName().equals("ABILENE CHRISTIAN UNIVERSITY"));
+		assertTrue("School1 not found in getSchool3",array.get(array.size()-1).getName().equals("zzzUniversity of Minnesota test"));	
 	}
 	//-----------------------------------------tearDown------------------------------------------------
 	@After
@@ -554,5 +607,8 @@ public class DatabaseHomeTest {
 		database.removeSchool(school2.getSchool());
 		database.removeSchool(school3.getSchool());
 		database.removeSchool(school1.getSchool());
+		database.removeUser(user1.getUsername());
+		database.removeUser(user2.getUsername());
+		database.removeUser(user3.getUsername());
 	}
 }

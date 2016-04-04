@@ -163,16 +163,7 @@ public class SchoolTest {
 		school1.addEmphasis("code");
 		assertTrue("setEmphasis working", school1.getEmphasisString().contains("code"));
 	}
-	@Test
-	public void testSetSchool() {
-		school1.setSchool("U of M");
-		assertTrue("setSchool working", school1.getSchool() == "U of M");
-	}
 	//---------------------------------------------Test Failures------------------------------------------------
-	@Test(expected = IllegalArgumentException.class)
-	public void setEmptyName(){
-		school1.setSchool("");
-	}
 	@Test(expected = IllegalArgumentException.class)
 	public void setEmptyState(){
 		school1.setState("");
@@ -272,9 +263,5 @@ public class SchoolTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void setEmptyEmphasis() {
 		school1.setEmphasis(null);
-	}
-	@Test(expected = IllegalArgumentException.class)
-	public void setEmptySchoolName() {
-		school1.setSchool("");
 	}
 }
