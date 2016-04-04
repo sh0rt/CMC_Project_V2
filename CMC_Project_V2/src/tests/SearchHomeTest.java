@@ -19,12 +19,14 @@ public class SearchHomeTest {
 		School[] search = test.search("UNIVERSITY OF",null, null, null, null,
 				null, null, null, null, null, null, null, null, null,
 				null, null, null);
+		/*
 		for(int i=0; i<search.length; i++){
 		  System.out.println(search[i].getName());
 		}
 		for(int i=0; i<search.length; i++){
 			System.out.println(test.getRecommend()[i].getSchool());
 		}
+		*/
 	}
 
 	@Test 

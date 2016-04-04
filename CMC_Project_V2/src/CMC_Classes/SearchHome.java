@@ -199,7 +199,7 @@ public class SearchHome {
 					index = g;
 				}
 			}
-			System.out.println(highest + " " + index);
+		//	System.out.println(highest + " " + index);
 			temp[p] = index; // index in the array of schools
 			highest = 0;
 			count[index] = 0;	
@@ -425,5 +425,4 @@ public class SearchHome {
 		return this.recommend;
 	}
 	//---------------------------implementing correct way-----------------------------------
-	
 }
