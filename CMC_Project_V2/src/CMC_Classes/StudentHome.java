@@ -9,7 +9,7 @@ package CMC_Classes;
 import java.util.*;
 //REMIND TYLER TO FINISH THIS RIGHT HEREEEEEEEEE!!!!!!!
 public class StudentHome {
-//USE THE DATABASE SO WHEN STUDENT ADDS STUFF IT ALSO GOES TO DATABASE EVERY TIME!!!!!
+	//USE THE DATABASE SO WHEN STUDENT ADDS STUFF IT ALSO GOES TO DATABASE EVERY TIME!!!!!
 	private User user;
 	//private DataBaseHome database;
 	private SearchHome search;
@@ -23,7 +23,7 @@ public class StudentHome {
 	public StudentHome(User user) {
 		super();
 		this.user = user;
-//		this.database = database;
+		//		this.database = database;
 		search = new SearchHome();
 	}
 

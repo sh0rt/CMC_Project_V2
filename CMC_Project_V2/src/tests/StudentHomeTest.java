@@ -35,41 +35,36 @@ public class StudentHomeTest {
 	@Test
 	public void testGetSavedSchools() {
 		sh.addSchool(sju);
-		assertTrue("u saved schools is SJU", sh.getSavedSchools().equals(sju));
+		assertTrue("u saved schools is SJU", sh.getSavedSchools().get(0).getName().equals("SJU"));
 	}
 
 	@Test
 	public void testRemoveSchool() {
-		assertTrue("sh removes school sju", sh.removeSchool(sju).equals(sju));
+		sh.addSchool(sju);
+		assertTrue("sh removes school sju", sh.removeSchool(sju).getName().equals("SJU"));
 	}
 
 	@Test
 	public void testAddSchool() {
-		assertTrue("u add school is true", sh.addSchool(sju).equals(true));
+		assertTrue("u add school is true", sh.addSchool(sju).getName().equals("SJU"));
 	}
 
 	@Test
 	public void testSearch() {
-		assertTrue("Search yields Adelphi", sh.search("Adelphi",null,null,null,null,null,null,null,null,null
-				,null,null,null,null,null,null,null)[0].getName().equals("Adelphi"));
+		assertTrue("Search yields Adelphi", sh.search("a",null,null,null,null,null,null,null,null,null
+				,null,null,null,null,null,null,null)[0].getName().contains("Saint Johns"));
 	}
 
 	@Test
 	public void testGetRecommend() {
-		assertTrue("getRecommend gets the recommended schools", sh.getRecommend()[0].equals("the first recommended search"));
-		assertTrue("getRecommend gets the recommended schools", sh.getRecommend()[1].equals("the second recommended search"));
-		assertTrue("getRecommend gets the recommended schools", sh.getRecommend()[2].equals("the third recommended search"));
-		assertTrue("getRecommend gets the recommended schools", sh.getRecommend()[3].equals("the fourth recommended search"));
-		assertTrue("getRecommend gets the recommended schools", sh.getRecommend()[4].equals("the fifth recommended search"));
+		sh.search("a", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+		assertTrue("getRecommend gets the recommended schools", sh.getRecommend()[0].getName().contains("University of Minnesota"));
 	}
 
 	@Test
 	public void testGetSearch() {
-		assertTrue("Get search returns top 5 results.", sh.getSearch()[0].equals("First school in the search, idk what that is"));
-		assertTrue("Get search returns top 5 results.", sh.getSearch()[1].equals("Second school in the search, idk what that is"));
-		assertTrue("Get search returns top 5 results.", sh.getSearch()[2].equals("Third school in the search, idk what that is"));
-		assertTrue("Get search returns top 5 results.", sh.getSearch()[3].equals("Fourth school in the search, idk what that is"));
-		assertTrue("Get search returns top 5 results.", sh.getSearch()[4].equals("Fifth school in the search, idk what that is"));
+		sh.search("a", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+		assertTrue("Get search returns top 5 results.", sh.getSearch()[0].getName().contains("Saint Johns"));
 	}
 
 	@Test
