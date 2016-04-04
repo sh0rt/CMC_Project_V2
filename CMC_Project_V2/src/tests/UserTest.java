@@ -132,8 +132,7 @@ public class UserTest {
 
 	@Test
 	public void testGetID() {
-		Assert.assertTrue("user1 ID is 12", user1.getID() == 12);
-		Assert.assertTrue("user2 ID is 13", user2.getID() == 13);
-		Assert.assertTrue("user3 ID is 14", user3.getID() == 14);
+		Assert.assertTrue("user1 ID is working", user1.getID() < user2.getID() && user2.getID() < user3.getID());
+
 	}
 }

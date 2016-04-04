@@ -615,7 +615,6 @@ public class DatabaseHomeTest {
 	@Test
 	public void testGetSchools(){
 		ArrayList<School> array = database.getSchools();
-	    System.out.println(array.get(array.size()-1).getName());
 		assertTrue("School1 not found in getSchool2",array.get(0).getName().equals("ABILENE CHRISTIAN UNIVERSITY"));
 		assertTrue("School1 not found in getSchool3",array.get(array.size()-1).getName().equals("zzzUniversity of Minnesota test"));	
 	}

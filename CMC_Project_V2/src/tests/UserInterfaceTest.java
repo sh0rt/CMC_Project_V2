@@ -19,15 +19,15 @@ public class UserInterfaceTest {
 //-----------------------------------------------------------------login--------------------------------------------------------------------------------------------------------------------------
 	@Test
 	public void testLoginSuccess() {
-		assertTrue("Login returned the incorrect user.",user.login("ImadUser", "Edited").equals(user2));
+		assertTrue("Login returned the incorrect user.",user.login("ImadUser", "Edited").getFirstName().equals(user2.getFirstName()));
 	}
 	@Test
 	public void testIncorrectLoginUsername() {
-		assertTrue("Login returned a user that is was not supposed to (incorrect username).",user.login("Megan", "Edited").equals(null));
+			assertTrue("incorrect username failed",user.login("Megan", "Edited").getFirstName().equals("x"));
 	}
 	@Test
 	public void testIncorrectLoginPassword() {
-		assertTrue("Login returned a user that is was not supposed to (incorrect password).",user.login("ImadUser", "CMC").equals(null));
+		assertTrue("incorrect username failed",user.login("ImadUser", "Wrong!!").getFirstName().equals("x"));
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyLoginUsername() {
