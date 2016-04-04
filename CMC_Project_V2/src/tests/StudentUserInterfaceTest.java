@@ -52,7 +52,7 @@ public class StudentUserInterfaceTest {
 	
 	@Test
 	public void testSearch() {
-		Assert.assertTrue("Search yields Adelphi", sh.search("a",null,null,null,null,null,null,null,null,null
+		Assert.assertTrue("Search yields Saint John's", sh.search("a",null,null,null,null,null,null,null,null,null
 				,null,null,null,null,null,null,null).contains("Saint Johns"));
 	}
 	
@@ -63,7 +63,6 @@ public class StudentUserInterfaceTest {
 	
 	@Test
 	public void testSaveSchool() {
-		System.out.println(sh.saveSchool(0));
-		Assert.assertTrue("Save School contains Saint John's University", sh.saveSchool(0).contains("Saint Johns"));
+		Assert.assertTrue("Save School contains University of Minnesota", sh.saveSchool(0).contains("University of Minnesota"));
 	}
 }
