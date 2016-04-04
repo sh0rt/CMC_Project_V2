@@ -187,11 +187,55 @@ public class SearchHome {
 			} catch (NullPointerException ex) {
 			}
 		}
-		for (int t = 0; t < schools.size(); t++) {
-			
+		
+		int highest = 0;
+		int index = 0;
+		int[] temp = new int[10];
+		int[] count = tallys;
+		for (int p = 0; p < 5; p++) { // find highest
+			for (int g = 0; g < schools.size(); g++) {
+				if (count[g] > highest) {
+					highest = count[g];
+					index = g;
+				}
+			}
+			System.out.println(highest + " " + index);
+			temp[p] = index; // index in the array of schools
+			highest = 0;
+			count[index] = 0;	
 		}
+		for (int h = 0; h < 5; h++) {
+			for (int k = 0; k < schools.size(); k++) {
+				if (count[k] > highest) {
+					highest = count[k];
+					index = k;
+				}
+			}
+			temp[h + 5] = index;
+			highest = 0;
+			count[index] = 0;
+		}
+		top[0] = schools.get(temp[0]);
+		top[1] = schools.get(temp[1]);
+		top[2] = schools.get(temp[2]);
+		top[3] = schools.get(temp[3]);
+		top[4] = schools.get(temp[4]);
+		this.top5[0] = schools.get(temp[0]);
+		this.top5[1] = schools.get(temp[1]);
+		this.top5[2] = schools.get(temp[2]);
+		this.top5[3] = schools.get(temp[3]);
+		this.top5[4] = schools.get(temp[4]);
+		recommend[0] = schools.get(temp[5]);
+		recommend[1] = schools.get(temp[6]);
+		recommend[2] = schools.get(temp[7]);
+		recommend[3] = schools.get(temp[8]);
+		recommend[4] = schools.get(temp[9]);
+		this.top10 = temp;
+		return top;
+	}
 		//------------------------------finish up here------------------------------------------------ ^^^^^^^^^^
 //		String[] em = emphasis;
+	/*
 		for (int t = 0; t < schools.size(); t++) {
 			try {
 				if (schools.get(t).getName().contains(s[0])) {
@@ -209,7 +253,7 @@ public class SearchHome {
 				if (schools.get(t).getLocation().contains(s[2])) {
 					tally[t][2] = 1;
 				}
-			} catch (NullPointerException ex) {
+			} catch (NullPointerException ex) {		System.out.println(test.getID(0));
 			}
 			try {
 				if (schools.get(t).getControl().contains(s[3])) {
@@ -255,14 +299,17 @@ public class SearchHome {
 				}
 			} catch (NullPointerException ex) {
 			}
-			try {
+			try {		System.out.println(test.getID(0));
 				if (d[1][0] < schools.get(t).getNumStudents() && schools.get(t).getNumStudents() < d[1][1]) {
 					tally[t][10] = 1;
 				}
 			} catch (NullPointerException ex) {
 			}
 			try {
-				if (d[2][0] < schools.get(t).getNumStudents() && schools.get(t).getNumStudents() < d[2][1]) {
+				if		int highest = 0;
+				int index = 0;
+				int[] temp = new int[10];
+				int[] count = new int[schools.size()]; (d[2][0] < schools.get(t).getNumStudents() && schools.get(t).getNumStudents() < d[2][1]) {
 					tally[t][11] = 1;
 				}
 			} catch (NullPointerException ex) {
@@ -346,6 +393,7 @@ public class SearchHome {
 		this.top10 = temp;
 		return top;
 	}
+	*/
 
 	/**
 	 * gets school ID
@@ -354,6 +402,8 @@ public class SearchHome {
 	 * @return top 10 schools based off search
 	 */
 	public int getID(int searchID) {
+		if(searchID<0 || searchID>10)
+			throw new IllegalArgumentException("ID must be between 0 and 10");
 		return this.top10[searchID];
 	}
 
@@ -374,4 +424,6 @@ public class SearchHome {
 	public School[] getRecommend() {
 		return this.recommend;
 	}
+	//---------------------------implementing correct way-----------------------------------
+	
 }
