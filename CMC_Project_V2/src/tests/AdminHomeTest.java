@@ -23,14 +23,14 @@ public class AdminHomeTest {
 	User user1, user2, user3, enduser, frontUser;
 	School school1, school2, school3;
 	String[] emphasis;
-	
+/*	
 	@Before
 	public void init() {
 		u = new User("Admin", "Adminingston", "a", "password", 'A', 'A');
 		ah = new AdminHome(u);
 		s = new School("Creative", "MN", null, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-	
-	
+	}
+	*/
 	@Before
 	public void setUp() throws Exception {
 		database = new DataBaseHome();
@@ -122,10 +122,6 @@ public class AdminHomeTest {
 		Assert.assertTrue("Name of user 2 is Lynn", ah.getUsers().get(2).getFirstName().equals("Lynn"));
 	}
 	
-	@Test
-	public void testEditSchool() {
-		//???
-	}
 	
 	@Test
 	public void testAddNewSchool() {
