@@ -354,7 +354,7 @@ public class DatabaseHomeTest {
 			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
 				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
 				school1.getPercentEnrolled(),school1.getAcademicScale(),0,
-				school1.getQualOfLife());
+				school1.getQualOfLife(),new String[3]);
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddSchoolWithEmptyQualOfLife(){

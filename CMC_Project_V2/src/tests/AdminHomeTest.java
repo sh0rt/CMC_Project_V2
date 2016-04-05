@@ -105,7 +105,7 @@ public class AdminHomeTest {
 		}
 		test = new AdminHome(UserHome.Login("tnweiss","weiss"));
 	}
-
+/*
 	@Test
 	public void testGetSchools() {
 		Assert.assertTrue("Name of school 2 is ADELPHI",
@@ -121,11 +121,16 @@ public class AdminHomeTest {
 		Assert.assertTrue("Name of user 1 is John User",ah.getUsers().get(1).getFirstName().equals("John"));
 		Assert.assertTrue("Name of user 2 is Lynn", ah.getUsers().get(2).getFirstName().equals("Lynn"));
 	}
-	
+	*/
 	
 	@Test
 	public void testAddNewSchool() {
-		
+		assertTrue("Add new school worked succesfully",test.addNewSchool(school1.getSchool(),school1.getState(),school1.getLocation(),
+				school1.getControl(),school1.getNumStudents(),school1.getPercentFemale(),
+			    school1.getSatVerbal(),school1.getSatMath(),school1.getExpenses(),
+				school1.getPercentFinAid(),school1.getNumApplicants(),school1.getPercentAdmitted(),
+				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
+				school1.getQualOfLife(),new String[3]).getSchool().equals(school1.getSchool()));
 	}
 	
 	//--------------------------------------get Schools / users-----------------------------------------
