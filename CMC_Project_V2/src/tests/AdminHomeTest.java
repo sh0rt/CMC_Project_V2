@@ -503,7 +503,78 @@ public class AdminHomeTest {
 				school1.getPercentEnrolled(),school1.getAcademicScale(),school1.getSocialscale(),
 				0,school1.getEmphasis());
 	}
-
+	//--------------------------------------add user---------------------------------------------------
+	@Test
+	public void testAddUser() {
+		assertTrue("AdminHome encountered an error adding user.",test.addNewUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(), 
+				user1.getPassword(), user1.getType()).getUsername().equals(user1.getUsername()));
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testaddNewUserWithTypeNotAorS() {
+		test.addNewUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(), 
+				user1.getPassword(), 'f');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testaddNewUserWithEmptyFirstname() {
+		test.addNewUser("", user1.getLastName(), user1.getUsername(),user1.getPassword(), 'f');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testaddNewUserWithEmptyLastname() {
+		test.addNewUser(user1.getFirstName(), "", user1.getUsername(),user1.getPassword(), 'f');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testaddNewUserWithEmptyUsername() {
+		test.addNewUser(user1.getFirstName(), user1.getLastName(), "",user1.getPassword(), 'f');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testaddNewUserWithEmptyPassword() {
+		test.addNewUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(),"", 'f');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testaddNewUserWithEmptyType() {
+		test.addNewUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(),user1.getPassword(), ' ');
+	}
+//--------------------------------------------------editUser-----------------------------------------------
+	@Test
+	public void testEditUser() {
+		user3.setFirstName("t");
+		assertTrue("AdminHome encountered an error editing user firstname",test.editUser("t", user3.getLastName(), user3.getUsername(), 
+				user3.getPassword(), user3.getType() , 'a').getFirstName().equals(user3.getFirstName()));
+		user3.setLastName("t");
+		assertTrue("AdminHome encountered an error editing user lastname.",test.editUser(user3.getFirstName(), "t", user3.getUsername(), 
+				user3.getPassword(), user3.getType(), 'a').getLastName().equals(user3.getLastName()));
+		user3.setPassword("t");
+		assertTrue("AdminHome encountered an error editing user password.",test.editUser(user3.getFirstName(), user3.getLastName(), user3.getUsername(), 
+				"t", user3.getType(),'a').getPassword().equals(user3.getPassword()));
+		user3.setType('s');
+		assertTrue("AdminHome encountered an error editing user type.",test.editUser(user3.getFirstName(), user3.getLastName(), user3.getUsername(), 
+				user3.getPassword(), 's','a').getType() == user3.getType());
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUserWithTypeNotAorS() {
+		test.editUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(), 
+				user1.getPassword(), 'f', 'a');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUserWithEmptyFirstname() {
+		test.editUser("", user1.getLastName(), user1.getUsername(),user1.getPassword(), 'f','a');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUserWithEmptyLastname() {
+		test.editUser(user1.getFirstName(), "", user1.getUsername(),user1.getPassword(), 'f','a');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUserWithEmptyUsername() {
+		test.editUser(user1.getFirstName(), user1.getLastName(), "",user1.getPassword(), 'f','a');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUserWithEmptyPassword() {
+		test.editUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(),"", 'f','a');
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUserWithEmptyType() {
+		test.editUser(user1.getFirstName(), user1.getLastName(), user1.getUsername(),user1.getPassword(), ' ', 'a');
+	}
 	//-----------------------------------------tearDown------------------------------------------------
 	@After
 	public void tearDown(){
